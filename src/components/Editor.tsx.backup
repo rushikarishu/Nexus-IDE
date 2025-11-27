@@ -1,0 +1,243 @@
+import { useEffect, useRef, useState } from "react";
+import MonacoEditor, { useMonaco, OnMount } from "@monaco-editor/react";
+import { getLspClient } from "../lib/lsp";
+
+interface EditorProps {
+    value: string;
+    language: string;
+    onChange: (value: string | undefined) => void;
+    onCursorChange?: (line: number, col: number) => void;
+    height?: string;
+    path?: string;
+    lspKey?: string; // Language key for LSP
+}
+
+interface CompletionItem {
+    label: string;
+    kind: number;
+    insertText?: string;
+    detail?: string;
+    documentation?: string | { value: string };
+}
+
+interface LspLocation {
+    uri: string;
+    range: {
+        start: { line: number; character: number };
+        end: { line: number; character: number };
+    };
+}
+
+export function Editor({ value, language, onChange, onCursorChange, path, lspKey, height = "100%" }: EditorProps) {
+    const editorRef = useRef<Parameters<OnMount>[0] | null>(null);
+    const monaco = useMonaco();
+    const [isReady, setIsReady] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // const editorRef = useRef<any>(null);
+
+    const handleEditorDidMount: OnMount = (editor, _monaco) => {
+        editorRef.current = editor;
+    };
+
+    useEffect(() => {
+        if (monaco) {
+            monaco.editor.defineTheme("nexus-dark", {
+                base: "vs-dark",
+                inherit: true,
+                rules: [],
+                colors: {
+                    "editor.background": "#020817", // card background
+                    "editor.foreground": "#f8fafc",
+                    "editor.lineHighlightBackground": "#1e293b",
+                    "editorLineNumber.foreground": "#64748b",
+                    "editorIndentGuide.background": "#1e293b",
+                },
+            });
+            monaco.editor.setTheme("nexus-dark");
+
+            // Register completion provider for Rust
+            const completionDisposable = monaco.languages.registerCompletionItemProvider("rust", {
+                provideCompletionItems: async (_model, position) => {
+                    try {
+                        const response = await rustLsp.sendRequest("textDocument/completion", {
+                            textDocument: { uri: `file://${path}` },
+                            position: { line: position.lineNumber - 1, character: position.column - 1 },
+                        }) as { items: CompletionItem[] } | null;
+                    }
+    }, [monaco]);
+
+            // Register LSP providers when Monaco and language are ready
+            useEffect(() => {
+                if (!monaco || !isReady || !path || !lspKey) return;
+
+                const lspClient = getLspClient(lspKey);
+
+                const getUri = () => `file://${path}`;
+
+                const provideCompletionItems = async (_model: unknown, position: { lineNumber: number; column: number }) => {
+                    try {
+                        const response = (await lspClient.sendRequest("textDocument/completion", {
+                            textDocument: { uri: getUri() },
+                            position: { line: position.lineNumber - 1, character: position.column - 1 },
+                        })) as { items?: CompletionItem[] };
+
+                        return {
+                            suggestions: (response.items || []).map((item: CompletionItem) => ({
+                                label: typeof item.label === "string" ? item.label : item.label,
+                                kind: item.kind || 1,
+                                insertText: item.insertText || item.label,
+                                detail: item.detail,
+                                documentation: typeof item.documentation === "string"
+                                    ? item.documentation
+                                    : item.documentation?.value,
+                            })),
+                        };
+                    } catch (e) {
+                        console.error("Completion error:", e);
+                        return { suggestions: [] };
+                    }
+                };
+
+                // Register completion provider for this language
+                const completionProvider = monaco.languages.registerCompletionItemProvider(language, {
+                    provideCompletionItems,
+                });
+
+                const provideDefinition = async (_model: unknown, position: { lineNumber: number; column: number }) => {
+                    try {
+                        const response = (await lspClient.sendRequest("textDocument/definition", {
+                            textDocument: { uri: getUri() },
+                            position: { line: position.lineNumber - 1, character: position.column - 1 },
+                        })) as LspLocation[] | LspLocation;
+
+                        if (!response) return null;
+
+                        const locations = Array.isArray(response) ? response : [response];
+                        return locations.map((loc) => ({
+                            uri: monaco.Uri.parse(loc.uri),
+                            range: new monaco.Range(
+                                loc.range.start.line + 1,
+                                loc.range.start.character + 1,
+                                loc.range.end.line + 1,
+                                loc.range.end.character + 1
+                            ),
+                        }));
+                    } catch (e) {
+                        console.error("Definition error:", e);
+                        return null;
+                    }
+                };
+
+                const definitionProvider = monaco.languages.registerDefinitionProvider(language, {
+                    provideDefinition,
+                });
+
+                const provideReferences = async (_model: unknown, position: { lineNumber: number; column: number }, _context: unknown) => {
+                    try {
+                        const response = (await lspClient.sendRequest("textDocument/references", {
+                            textDocument: { uri: getUri() },
+                            position: { line: position.lineNumber - 1, character: position.column - 1 },
+                            context: { includeDeclaration: true },
+                        })) as LspLocation[];
+
+                        if (!response) return null;
+
+                        return response.map((loc) => ({
+                            uri: monaco.Uri.parse(loc.uri),
+                            range: new monaco.Range(
+                                loc.range.start.line + 1,
+                                loc.range.start.character + 1,
+                                loc.range.end.line + 1,
+                                loc.range.end.character + 1
+                            ),
+                        }));
+                    } catch (e) {
+                        console.error("References error:", e);
+                        return null;
+                    }
+                };
+
+                const referencesProvider = monaco.languages.registerReferenceProvider(language, {
+                    provideReferences,
+                });
+
+                return () => {
+                    completionProvider.dispose();
+                    definitionProvider.dispose();
+                    referencesProvider.dispose();
+                };
+            }, [monaco, isReady, path, language, lspKey]);
+
+            // Handle Document Sync (didOpen, didChange)
+            useEffect(() => {
+                if (path && language === "rust") {
+                    // Send didOpen
+                    const lspClient = getLspClient(lspKey || "rust"); // Fallback to "rust" if lspKey is undefined for didOpen
+                    lspClient.sendNotification("textDocument/didOpen", {
+                        textDocument: {
+                            uri: `file://${path}`,
+                            languageId: "rust",
+                            version: 1,
+                            text: value,
+                        },
+                    }).catch(console.error);
+                }
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+            }, [path, language]); // Only on path change (new file loaded)
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const handleEditorChange = (value: string | undefined, _event: any) => {
+                onChange(value);
+            };
+
+
+
+
+            const [fontSize, setFontSize] = useState(() => {
+                const saved = localStorage.getItem("editor-font-size");
+                return saved ? parseInt(saved, 10) : 14;
+            });
+
+            useEffect(() => {
+                const handleFontSizeChange = (e: Event) => {
+                    const customEvent = e as CustomEvent<number>;
+                    setFontSize(customEvent.detail);
+                };
+
+                window.addEventListener("font-size-changed", handleFontSizeChange);
+                return () => window.removeEventListener("font-size-changed", handleFontSizeChange);
+            }, []);
+
+            return (
+                <MonacoEditor
+                    height={height}
+                    defaultLanguage="rust"
+                    language={language}
+                    value={value}
+                    theme="nexus-dark"
+                    onChange={handleEditorChange}
+                    onMount={(editor, monaco) => {
+                        handleEditorDidMount(editor, monaco);
+                        editor.onDidChangeCursorPosition((e) => {
+                            if (onCursorChange) {
+                                onCursorChange(e.position.lineNumber, e.position.column);
+                            }
+                        });
+                    }}
+                    options={{
+                        minimap: { enabled: true },
+                        fontSize: fontSize,
+                        fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+                        scrollBeyondLastLine: false,
+                        automaticLayout: true,
+                        padding: { top: 16, bottom: 16 },
+                        // Virtual scrolling optimization
+                        stopRenderingLineAfter: -1, // Render all lines (Monaco handles virtualization)
+                        smoothScrolling: true,
+                        cursorBlinking: "smooth",
+                        cursorSmoothCaretAnimation: "on",
+                        renderWhitespace: "selection",
+                    }}
+                />
+            );
+        }

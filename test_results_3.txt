@@ -1,0 +1,699 @@
+
+> nexus-ide@0.1.0 test
+> vitest run
+
+
+[1m[46m RUN [49m[22m [36mv4.0.10 [39m[90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide[39m
+
+[90mstderr[2m | src/lib/contextCollector.test.ts[2m > [22m[2mcontextCollector[2m > [22m[2mcollectContext[2m > [22m[2mhandles LSP errors gracefully
+[22m[39mFailed to get definitions: Error: LSP timeout
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/contextCollector.test.ts:144:63
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+
+[90mstderr[2m | src/lib/contextCollector.test.ts[2m > [22m[2mcontextCollector[2m > [22m[2mcollectContext[2m > [22m[2mhandles missing files gracefully
+[22m[39mFailed to read file /nonexistent.ts: Error: File not found
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/contextCollector.test.ts:161:46
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+
+ [31m❯[39m src/lib/contextCollector.test.ts [2m([22m[2m12 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 39[2mms[22m[39m
+       [32m✓[39m collects selected code as primary context[32m 4[2mms[22m[39m
+       [32m✓[39m queries LSP for definitions when lspKey provided[32m 7[2mms[22m[39m
+[31m       [31m×[31m includes hover type information[39m[32m 12[2mms[22m[39m
+       [32m✓[39m sorts context items by relevance[32m 2[2mms[22m[39m
+       [32m✓[39m truncates context to fit token budget[32m 1[2mms[22m[39m
+       [32m✓[39m handles LSP errors gracefully[32m 7[2mms[22m[39m
+       [32m✓[39m handles missing files gracefully[32m 2[2mms[22m[39m
+       [32m✓[39m formats context items into markdown sections[32m 1[2mms[22m[39m
+       [32m✓[39m groups context by type[32m 0[2mms[22m[39m
+       [32m✓[39m includes file paths in formatted output[32m 0[2mms[22m[39m
+       [32m✓[39m handles empty context array[32m 0[2mms[22m[39m
+       [32m✓[39m formats code blocks with proper markdown syntax[32m 0[2mms[22m[39m
+ [32m✓[39m src/components/GitBranches.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 238[2mms[22m[39m
+[90mstderr[2m | src/components/Editor.navigation.test.tsx[2m > [22m[2mEditor - Go To/Peek Definition and References[2m > [22m[2mshould show peek view on Peek Definition
+[22m[39mAn update to Editor inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould render welcome message when no history
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould auto-create session on mount if none exists
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/Editor.navigation.test.tsx[2m > [22m[2mEditor - Go To/Peek Definition and References[2m > [22m[2mshould show peek view on Peek Definition
+[22m[39mFailed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+Failed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+Failed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+Failed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould not auto-create session if one exists
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/Editor.navigation.test.tsx[2m > [22m[2mEditor - Go To/Peek Definition and References[2m > [22m[2mshould dispatch editor-navigate event on Go to References
+[22m[39mFailed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+Failed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+
+[90mstderr[2m | src/components/Editor.navigation.test.tsx[2m > [22m[2mEditor - Go To/Peek Definition and References[2m > [22m[2mshould show peek view on Peek References
+[22m[39mAn update to Editor inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/components/Editor.navigation.test.tsx[2m > [22m[2mEditor - Go To/Peek Definition and References[2m > [22m[2mshould show peek view on Peek References
+[22m[39mFailed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+Failed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+
+ [32m✓[39m src/test/AiEditorWorkflow.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 181[2mms[22m[39m
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould render message history
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+ [32m✓[39m src/components/Editor.navigation.test.tsx [2m([22m[2m8 tests[22m[2m)[22m[33m 414[2mms[22m[39m
+ [32m✓[39m src/components/DebugComponents.test.tsx [2m([22m[2m16 tests[22m[2m)[22m[33m 507[2mms[22m[39m
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould send prompt when form submitted
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/TaskRunnerPanel.test.tsx[2m > [22m[2mTaskRunnerPanel[2m > [22m[2mshould display error when loading tasks fails
+[22m[39mFailed to load tasks: Failed to load tasks
+
+ [31m❯[39m src/components/DebugPanel.test.tsx [2m([22m[2m3 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 410[2mms[22m[39m
+     [32m✓[39m renders empty state when no configs found[32m 199[2mms[22m[39m
+     [32m✓[39m renders launch configurations[32m 68[2mms[22m[39m
+[31m     [31m×[31m launches selected debug configuration[39m[32m 138[2mms[22m[39m
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould clear input after sending prompt
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould not send empty prompt
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould not send prompt when loading
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/Editor.test.tsx[2m > [22m[2mEditor - LSP providers and AI actions[2m > [22m[2mtriggers AI inline actions via CodeAction provider and onTriggerAI callback
+[22m[39mLSP Code Action Error: TypeError: Cannot read properties of undefined (reading 'Auto')
+    at Object.provideCodeActions [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:523:105[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.test.tsx:222:39
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+
+[90mstderr[2m | src/components/Editor.test.tsx[2m > [22m[2mEditor - LSP providers and AI actions[2m > [22m[2mtriggers AI inline actions via CodeAction provider and onTriggerAI callback
+[22m[39mFailed to read file /test.rs: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at getFileContent [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/contextCollector.ts:162:35[90m)[39m
+    at collectContext [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/contextCollector.ts:45:39[90m)[39m
+    at Object.run [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:574:59[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.test.tsx:229:24
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:20
+Failed to read file /test.rs: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at getFileContent [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/contextCollector.ts:162:35[90m)[39m
+    at collectContext [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/contextCollector.ts:45:39[90m)[39m
+    at Object.run [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:601:59[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.test.tsx:230:25
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:20
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould show loading indicator
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/Editor.test.tsx[2m > [22m[2mEditor - LSP providers and AI actions[2m > [22m[2mtriggers AI inline actions via CodeAction provider and onTriggerAI callback
+[22m[39mFailed to extract imports: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at extractImports [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/contextCollector.ts:182:31[90m)[39m
+    at collectContext [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/contextCollector.ts:123:31[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at Object.run [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:574:53[90m)[39m
+Failed to extract imports: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at extractImports [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/contextCollector.ts:182:31[90m)[39m
+    at collectContext [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/contextCollector.ts:123:31[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at Object.run [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:601:53[90m)[39m
+
+[90mstderr[2m | src/components/Editor.test.tsx[2m > [22m[2mEditor - LSP providers and AI actions[2m > [22m[2mtriggers AI fix action for diagnostics
+[22m[39mLSP Code Action Error: TypeError: Cannot read properties of undefined (reading 'Auto')
+    at Object.provideCodeActions [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:523:105[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.test.tsx:261:39
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+
+ [31m❯[39m src/components/Editor.test.tsx [2m([22m[2m4 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 213[2mms[22m[39m
+     [32m✓[39m registers LSP completion, definition, reference and hover providers and calls LSP client correctly[32m 98[2mms[22m[39m
+     [32m✓[39m sends didOpen notification when path and lspKey are provided[32m 11[2mms[22m[39m
+[31m     [31m×[31m triggers AI inline actions via CodeAction provider and onTriggerAI callback[39m[32m 79[2mms[22m[39m
+     [32m✓[39m triggers AI fix action for diagnostics[32m 19[2mms[22m[39m
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould display error message
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/Editor.tsx:134:74
+[22m[39mFailed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+Failed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+Failed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+Failed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+
+ [32m✓[39m src/components/TestExplorer.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 271[2mms[22m[39m
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould retry on error
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould show proposals when available
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould call approveProposal when proposal approved
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould call rejectProposal when proposal rejected
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould toggle mode dropdown
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould change mode and recreate session
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/TaskRunnerPanel.test.tsx[2m > [22m[2mTaskRunnerPanel[2m > [22m[2mshould handle task run failure
+[22m[39mFailed to run task: Task execution failed
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould call onClose when close button clicked
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+ [32m✓[39m src/components/GoToSymbolModal.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[33m 512[2mms[22m[39m
+     [33m[2m✓[22m[39m fetches and displays workspace symbols based on query [33m 448[2mms[22m[39m
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould disable input when loading
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould show send icon when not loading
+[22m[39mFailed to get RAG status: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at checkStatus [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:48:38[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/AIChatPanel.tsx:55:9
+    at Object.react_stack_bottom_frame [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:25989:20[90m)[39m
+    at runWithFiberInDEV [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:874:13[90m)[39m
+    at commitHookEffectListMount [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13249:29[90m)[39m
+    at commitHookPassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:13336:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15484:13[90m)[39m
+    at recursivelyTraversePassiveMountEffects [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15439:11[90m)[39m
+    at commitPassiveMountOnFiber [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4mreact-dom[24m/cjs/react-dom-client.development.js:15519:11[90m)[39m
+
+ [32m✓[39m src/components/AIChatPanel.test.tsx [2m([22m[2m19 tests[22m[2m)[22m[33m 851[2mms[22m[39m
+ [32m✓[39m src/components/TaskRunnerPanel.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[33m 760[2mms[22m[39m
+ [32m✓[39m src/components/Sidebar.test.tsx [2m([22m[2m15 tests[22m[2m)[22m[33m 946[2mms[22m[39m
+[90mstderr[2m | src/components/SourceControlPanel.test.tsx[2m > [22m[2mSourceControlPanel[2m > [22m[2mshould show alert on commit failure
+[22m[39mFailed to commit: Commit failed
+
+ [32m✓[39m src/components/SourceControlPanel.test.tsx [2m([22m[2m13 tests[22m[2m)[22m[33m 1115[2mms[22m[39m
+[90mstderr[2m | src/components/SearchPanel.test.tsx[2m > [22m[2mSearchPanel[2m > [22m[2mshould show error message on search failure
+[22m[39mSearch failed: Search failed
+
+ [32m✓[39m src/components/DiffPreview.test.tsx [2m([22m[2m11 tests[22m[2m)[22m[33m 1972[2mms[22m[39m
+     [33m[2m✓[22m[39m toggles hunk acceptance state when clicking accept button [33m 807[2mms[22m[39m
+     [33m[2m✓[22m[39m toggles hunk rejection state when clicking reject button [33m 321[2mms[22m[39m
+     [33m[2m✓[22m[39m changes button text to "Apply Selected" when hunks are selected [33m 337[2mms[22m[39m
+[90mstderr[2m | src/hooks/usePlugins.test.ts[2m > [22m[2musePlugins[2m > [22m[2mmarks plugin as inactive and records error when script loading fails
+[22m[39mFailed to load plugin Broken Plugin: Error: Script error
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/usePlugins.test.ts:75:36
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+[90mstderr[2m | src/hooks/usePlugins.test.ts[2m > [22m[2musePlugins[2m > [22m[2mshows toast error when fetching plugins fails
+[22m[39mFailed to fetch plugins: Error: List failed
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/usePlugins.test.ts:89:42
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+ [32m✓[39m src/components/SearchPanel.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[33m 2334[2mms[22m[39m
+     [33m[2m✓[22m[39m should debounce search requests [33m 334[2mms[22m[39m
+     [33m[2m✓[22m[39m should display search results [33m 342[2mms[22m[39m
+     [33m[2m✓[22m[39m should call onFileSelect when result clicked [33m 333[2mms[22m[39m
+     [33m[2m✓[22m[39m should show error message on search failure [33m 345[2mms[22m[39m
+     [33m[2m✓[22m[39m should handle case sensitive search [33m 314[2mms[22m[39m
+     [33m[2m✓[22m[39m should handle replace all [33m 395[2mms[22m[39m
+ [32m✓[39m src/hooks/usePlugins.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 267[2mms[22m[39m
+[90mstderr[2m | src/lib/lsp.test.ts[2m > [22m[2mshutdownAllLspClients[2m > [22m[2mshould handle shutdown failures gracefully
+[22m[39mFailed to shutdown rust LSP: Error: Shutdown failed
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/lsp.test.ts:325:38
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+ [32m✓[39m src/lib/lsp.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 289[2mms[22m[39m
+ [32m✓[39m src/hooks/useDiagnostics.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 196[2mms[22m[39m
+ [32m✓[39m src/components/PluginsPanel.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[33m 383[2mms[22m[39m
+[90mstderr[2m | src/components/Editor.rename.test.tsx[2m > [22m[2mEditor - Rename Symbol[2m > [22m[2mshould handle rename errors gracefully
+[22m[39mLSP Rename Error: Error: LSP not available
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.rename.test.tsx:169:47
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+
+[90mstdout[2m | src/hooks/useFileSystem.test.ts[2m > [22m[2museFileSystem[2m > [22m[2mshould auto-save after delay
+[22m[39mAuto-saved: /test/file.rs
+
+ [32m✓[39m src/components/Editor.rename.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 159[2mms[22m[39m
+ [32m✓[39m src/components/GitStashList.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 208[2mms[22m[39m
+ [32m✓[39m src/hooks/useFileSystem.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 198[2mms[22m[39m
+[90mstderr[2m | src/hooks/useTerminalState.test.ts[2m > [22m[2museTerminalState[2m > [22m[2mshould handle run_file failure by writing to terminal
+[22m[39mFailed to run file: Error: Run failed
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/useTerminalState.test.ts:163:23
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+[90mstderr[2m | src/hooks/useTerminalState.test.ts[2m > [22m[2museTerminalState[2m > [22m[2mshould fallback to toast if writing to terminal fails
+[22m[39mFailed to run file: Error: Run failed
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/useTerminalState.test.ts:189:23
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+ [32m✓[39m src/components/OutlinePanel.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 198[2mms[22m[39m
+ [32m✓[39m src/hooks/useTerminalState.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 132[2mms[22m[39m
+[90mstderr[2m | src/components/Editor.codeActions.test.tsx[2m > [22m[2mEditor - LSP Code Actions[2m > [22m[2mshould handle LSP code action errors gracefully
+[22m[39mLSP Code Action Error: Error: LSP error
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.codeActions.test.tsx:280:47
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+ [32m✓[39m src/components/Editor.codeActions.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 145[2mms[22m[39m
+[90mstderr[2m | src/hooks/useAISession.test.ts[2m > [22m[2museAISession[2m > [22m[2msendPrompt[2m > [22m[2mshould handle send errors
+[22m[39mAI Error: Error: Network error
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/useAISession.test.ts:111:40
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+
+[90mstderr[2m | src/components/Editor.tsx:134:74
+[22m[39mFailed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+Failed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+Failed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+Failed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+Failed to set breakpoints: TypeError: Cannot read properties of undefined (reading 'invoke')
+    at invoke [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@tauri-apps[24m/api/core.js:200:39[90m)[39m
+    at Module.setBreakpoints [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/dap.ts:62:11[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:134:21
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+
+ [32m✓[39m src/hooks/useAISession.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 138[2mms[22m[39m
+ [32m✓[39m src/hooks/useNavigationHistory.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 83[2mms[22m[39m
+ [32m✓[39m src/hooks/useLspErrors.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 57[2mms[22m[39m
+[90mstdout[2m | src/test/RunWorkflow.test.tsx[2m > [22m[2mRun Workflow Integration[2m > [22m[2mshould initialize terminal and run file when Run button is clicked
+[22m[39m[Terminal] Component rendered, visible: [33mtrue[39m
+
+[90mstdout[2m | src/test/RunWorkflow.test.tsx[2m > [22m[2mRun Workflow Integration[2m > [22m[2mshould initialize terminal and run file when Run button is clicked
+[22m[39m[Terminal] Component rendered, visible: [33mtrue[39m
+
+[90mstdout[2m | src/test/RunWorkflow.test.tsx[2m > [22m[2mRun Workflow Integration[2m > [22m[2mshould initialize terminal and run file when Run button is clicked
+[22m[39m[Terminal] Component rendered, visible: [33mtrue[39m
+
+ [32m✓[39m src/test/RunWorkflow.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 56[2mms[22m[39m
+ [32m✓[39m src/components/GitHistory.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 66[2mms[22m[39m
+ [32m✓[39m src/components/StatusBar.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 88[2mms[22m[39m
+ [32m✓[39m src/lib/pluginSystem.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m src/hooks/useDebounce.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 3 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/components/DebugPanel.test.tsx[2m > [22mDebugPanel[2m > [22mlaunches selected debug configuration
+[31m[1mAssertionError[22m: expected "vi.fn()" to be called at least once[39m
+[36m [2m❯[22m src/components/DebugPanel.test.tsx:[2m104:34[22m[39m
+    [90m102| [39m        fireEvent[33m.[39m[34mclick[39m(runButton)[33m;[39m
+    [90m103| [39m
+    [90m104| [39m        [34mexpect[39m(mockOpenTerminal)[33m.[39m[34mtoHaveBeenCalled[39m()[33m;[39m
+    [90m   | [39m                                 [31m^[39m
+    [90m105| [39m        [35mawait[39m [34mwaitFor[39m(() [33m=>[39m {
+    [90m106| [39m            [34mexpect[39m(debugLaunchPayload)[33m.[39m[34mtoEqual[39m({
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/components/Editor.test.tsx[2m > [22mEditor - LSP providers and AI actions[2m > [22mtriggers AI inline actions via CodeAction provider and onTriggerAI callback
+[31m[1mAssertionError[22m: expected "vi.fn()" to be called 2 times, but got 0 times[39m
+[36m [2m❯[22m src/components/Editor.test.tsx:[2m232:29[22m[39m
+    [90m230| [39m        refactor[33m.[39maction[33m.[39m[34mrun[39m()[33m;[39m
+    [90m231| [39m
+    [90m232| [39m        [34mexpect[39m(onTriggerAI)[33m.[39m[34mtoHaveBeenCalledTimes[39m([34m2[39m)[33m;[39m
+    [90m   | [39m                            [31m^[39m
+    [90m233| [39m        expect(onTriggerAI.mock.calls[0][0]).toContain('Explain this c…
+    [90m234| [39m        expect(onTriggerAI.mock.calls[1][0]).toContain('Refactor this …
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/lib/contextCollector.test.ts[2m > [22mcontextCollector[2m > [22mcollectContext[2m > [22mincludes hover type information
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m src/lib/contextCollector.test.ts:[2m100:64[22m[39m
+    [90m 98| [39m            )[33m;[39m
+    [90m 99| [39m
+    [90m100| [39m            expect(context.some(item => item.type === 'type')).toBe(tr…
+    [90m   | [39m                                                               [31m^[39m
+    [90m101| [39m        })[33m;[39m
+    [90m102| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m3 failed[39m[22m[2m | [22m[1m[32m30 passed[39m[22m[90m (33)[39m
+[2m      Tests [22m [1m[31m3 failed[39m[22m[2m | [22m[1m[32m224 passed[39m[22m[90m (227)[39m
+[2m   Start at [22m 10:30:17
+[2m   Duration [22m 8.12s[2m (transform 6.91s, setup 6.91s, collect 29.44s, tests 13.46s, environment 49.35s, prepare 873ms)[22m
+

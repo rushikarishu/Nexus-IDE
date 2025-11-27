@@ -1,0 +1,384 @@
+
+> nexus-ide@0.1.0 test
+> vitest run
+
+
+[1m[46m RUN [49m[22m [36mv4.0.10 [39m[90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide[39m
+
+[90mstderr[2m | src/lib/lsp.test.ts[2m > [22m[2mshutdownAllLspClients[2m > [22m[2mshould handle shutdown failures gracefully
+[22m[39mFailed to shutdown rust LSP: Error: Shutdown failed
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/lsp.test.ts:325:38
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+ [32m✓[39m src/lib/lsp.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 235[2mms[22m[39m
+[90mstderr[2m | src/hooks/usePlugins.test.ts[2m > [22m[2musePlugins[2m > [22m[2mmarks plugin as inactive and records error when script loading fails
+[22m[39mFailed to load plugin Broken Plugin: Error: Script error
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/usePlugins.test.ts:75:36
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+[90mstderr[2m | src/hooks/usePlugins.test.ts[2m > [22m[2musePlugins[2m > [22m[2mshows toast error when fetching plugins fails
+[22m[39mFailed to fetch plugins: Error: List failed
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/usePlugins.test.ts:89:42
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+[90mstderr[2m | src/components/TaskRunnerPanel.test.tsx[2m > [22m[2mTaskRunnerPanel[2m > [22m[2mshould display error when loading tasks fails
+[22m[39mFailed to load tasks: Failed to load tasks
+
+ [32m✓[39m src/hooks/usePlugins.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 285[2mms[22m[39m
+ [32m✓[39m src/components/TestExplorer.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 217[2mms[22m[39m
+ [32m✓[39m src/components/DebugComponents.test.tsx [2m([22m[2m16 tests[22m[2m)[22m[33m 317[2mms[22m[39m
+[90mstderr[2m | src/components/TaskRunnerPanel.test.tsx[2m > [22m[2mTaskRunnerPanel[2m > [22m[2mshould handle task run failure
+[22m[39mFailed to run task: Task execution failed
+
+ [32m✓[39m src/components/PluginsPanel.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 237[2mms[22m[39m
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould render welcome message when no history
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould not auto-create session if one exists
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould render message history
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m src/components/TaskRunnerPanel.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[33m 590[2mms[22m[39m
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould not send empty prompt
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m src/components/GoToSymbolModal.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[33m 480[2mms[22m[39m
+     [33m[2m✓[22m[39m fetches and displays workspace symbols based on query [33m 415[2mms[22m[39m
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould not send prompt when loading
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould show loading indicator
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m src/components/DebugPanel.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 314[2mms[22m[39m
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould display error message
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould retry on error
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould show proposals when available
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould call approveProposal when proposal approved
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould call rejectProposal when proposal rejected
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould toggle mode dropdown
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m src/components/Sidebar.test.tsx [2m([22m[2m15 tests[22m[2m)[22m[33m 607[2mms[22m[39m
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould call onClose when close button clicked
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould disable input when loading
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/components/AIChatPanel.test.tsx[2m > [22m[2mAIChatPanel[2m > [22m[2mshould show send icon when not loading
+[22m[39mAn update to AIChatPanel inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m src/components/AIChatPanel.test.tsx [2m([22m[2m19 tests[22m[2m)[22m[33m 595[2mms[22m[39m
+[90mstderr[2m | src/components/SourceControlPanel.test.tsx[2m > [22m[2mSourceControlPanel[2m > [22m[2mshould show alert on commit failure
+[22m[39mFailed to commit: Commit failed
+
+ [32m✓[39m src/components/SourceControlPanel.test.tsx [2m([22m[2m13 tests[22m[2m)[22m[33m 845[2mms[22m[39m
+[90mstderr[2m | src/components/SearchPanel.test.tsx[2m > [22m[2mSearchPanel[2m > [22m[2mshould show error message on search failure
+[22m[39mSearch failed: Search failed
+
+ [32m✓[39m src/components/DiffPreview.test.tsx [2m([22m[2m11 tests[22m[2m)[22m[33m 1562[2mms[22m[39m
+     [33m[2m✓[22m[39m toggles hunk acceptance state when clicking accept button [33m 646[2mms[22m[39m
+ [32m✓[39m src/components/GitStashList.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 137[2mms[22m[39m
+ [32m✓[39m src/components/GitBranches.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 189[2mms[22m[39m
+[90mstderr[2m | src/hooks/useAISession.test.ts[2m > [22m[2museAISession[2m > [22m[2msendPrompt[2m > [22m[2mshould handle send errors
+[22m[39mAI Error: Error: Network error
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/useAISession.test.ts:111:40
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+
+ [32m✓[39m src/hooks/useAISession.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 153[2mms[22m[39m
+ [32m✓[39m src/components/SearchPanel.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[33m 2058[2mms[22m[39m
+     [33m[2m✓[22m[39m should display search results [33m 315[2mms[22m[39m
+     [33m[2m✓[22m[39m should call onFileSelect when result clicked [33m 302[2mms[22m[39m
+     [33m[2m✓[22m[39m should handle case sensitive search [33m 320[2mms[22m[39m
+     [33m[2m✓[22m[39m should handle replace all [33m 360[2mms[22m[39m
+[90mstderr[2m | src/hooks/useTerminalState.test.ts[2m > [22m[2museTerminalState[2m > [22m[2mshould handle run_file failure by writing to terminal
+[22m[39mFailed to run file: Error: Run failed
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/useTerminalState.test.ts:163:23
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+[90mstderr[2m | src/hooks/useTerminalState.test.ts[2m > [22m[2museTerminalState[2m > [22m[2mshould fallback to toast if writing to terminal fails
+[22m[39mFailed to run file: Error: Run failed
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/useTerminalState.test.ts:189:23
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+ [32m✓[39m src/hooks/useTerminalState.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 110[2mms[22m[39m
+[90mstdout[2m | src/hooks/useFileSystem.test.ts[2m > [22m[2museFileSystem[2m > [22m[2mshould auto-save after delay
+[22m[39mAuto-saved: /test/file.rs
+
+ [32m✓[39m src/hooks/useFileSystem.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 99[2mms[22m[39m
+ [32m✓[39m src/components/OutlinePanel.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 155[2mms[22m[39m
+[90mstdout[2m | src/test/RunWorkflow.test.tsx[2m > [22m[2mRun Workflow Integration[2m > [22m[2mshould initialize terminal and run file when Run button is clicked
+[22m[39m[Terminal] Component rendered, visible: [33mtrue[39m
+
+[90mstdout[2m | src/test/RunWorkflow.test.tsx[2m > [22m[2mRun Workflow Integration[2m > [22m[2mshould initialize terminal and run file when Run button is clicked
+[22m[39m[Terminal] Component rendered, visible: [33mtrue[39m
+
+[90mstdout[2m | src/test/RunWorkflow.test.tsx[2m > [22m[2mRun Workflow Integration[2m > [22m[2mshould initialize terminal and run file when Run button is clicked
+[22m[39m[Terminal] Component rendered, visible: [33mtrue[39m
+
+ [32m✓[39m src/test/RunWorkflow.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 98[2mms[22m[39m
+ [32m✓[39m src/hooks/useDiagnostics.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 106[2mms[22m[39m
+ [32m✓[39m src/hooks/useNavigationHistory.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 85[2mms[22m[39m
+ [32m✓[39m src/components/StatusBar.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 84[2mms[22m[39m
+ [32m✓[39m src/hooks/useLspErrors.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 46[2mms[22m[39m
+ [32m✓[39m src/components/GitHistory.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 62[2mms[22m[39m
+ [32m✓[39m src/lib/pluginSystem.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+[90mstderr[2m | src/lib/contextCollector.test.ts[2m > [22m[2mcontextCollector[2m > [22m[2mcollectContext[2m > [22m[2mhandles LSP errors gracefully
+[22m[39mFailed to get definitions: Error: LSP timeout
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/contextCollector.test.ts:146:63
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+
+[90mstderr[2m | src/lib/contextCollector.test.ts[2m > [22m[2mcontextCollector[2m > [22m[2mcollectContext[2m > [22m[2mhandles missing files gracefully
+[22m[39mFailed to read file /nonexistent.ts: Error: File not found
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/contextCollector.test.ts:163:46
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+
+ [32m✓[39m src/lib/contextCollector.test.ts [2m([22m[2m12 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+ [32m✓[39m src/hooks/useDebounce.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Suites 5 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/components/Editor.codeActions.test.tsx[2m [ src/components/Editor.codeActions.test.tsx ][22m
+[41m[1m FAIL [22m[49m src/components/Editor.navigation.test.tsx[2m [ src/components/Editor.navigation.test.tsx ][22m
+[41m[1m FAIL [22m[49m src/components/Editor.rename.test.tsx[2m [ src/components/Editor.rename.test.tsx ][22m
+[41m[1m FAIL [22m[49m src/components/Editor.test.tsx[2m [ src/components/Editor.test.tsx ][22m
+[41m[1m FAIL [22m[49m src/test/AiEditorWorkflow.test.tsx[2m [ src/test/AiEditorWorkflow.test.tsx ][22m
+[31m[1mError[22m: Transform failed with 1 error:
+/home/projectbasecamp/Desktop/Griffindor/nexus-ide/src/components/Editor.tsx:649:20: ERROR: Expected ")" but found "}"[39m
+  Plugin: [35mvite:esbuild[39m
+  File: [36m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/src/components/Editor.tsx[39m:649:20
+[33m  
+  Expected ")" but found "}"
+  647 |                          actions.push(fixAction);
+  648 |                      }
+  649 |                      });
+      |                      ^
+  650 |      }
+  651 |  
+  [39m
+[90m [2m❯[22m failureErrorWithLog node_modules/esbuild/lib/main.js:[2m1467:15[22m[39m
+[90m [2m❯[22m node_modules/esbuild/lib/main.js:[2m736:50[22m[39m
+[90m [2m❯[22m responseCallbacks.<computed> node_modules/esbuild/lib/main.js:[2m603:9[22m[39m
+[90m [2m❯[22m handleIncomingPacket node_modules/esbuild/lib/main.js:[2m658:12[22m[39m
+[90m [2m❯[22m Socket.readFromStdout node_modules/esbuild/lib/main.js:[2m581:7[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m5 failed[39m[22m[2m | [22m[1m[32m28 passed[39m[22m[90m (33)[39m
+[2m      Tests [22m [1m[32m204 passed[39m[22m[90m (204)[39m
+[2m   Start at [22m 10:35:47
+[2m   Duration [22m 6.21s[2m (transform 4.13s, setup 5.18s, collect 16.13s, tests 9.71s, environment 39.98s, prepare 749ms)[22m
+

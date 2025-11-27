@@ -1,0 +1,100 @@
+{
+  "mcp_servers": {
+    "context7": {
+      "name": "Context7 MCP",
+      "description": "Latest documentation and context management",
+      "enabled": true,
+      "endpoint": "http://localhost:8001",
+      "features": [
+        "documentation_retrieval",
+        "context_management",
+        "knowledge_base_access"
+      ],
+      "config": {
+        "max_context_length": 32000,
+        "auto_refresh": true,
+        "cache_duration": 3600
+      }
+    },
+    "sequential_thinking": {
+      "name": "Sequential Thinking MCP",
+      "description": "Enhanced reasoning and step-by-step problem solving",
+      "enabled": true,
+      "endpoint": "http://localhost:8002",
+      "features": [
+        "chain_of_thought",
+        "multi_step_reasoning",
+        "problem_decomposition"
+      ],
+      "config": {
+        "max_reasoning_steps": 20,
+        "backtracking_enabled": true,
+        "parallel_exploration": false
+      }
+    },
+    "meta_thinker": {
+      "name": "Meta Thinker Agent",
+      "description": "Strategic oversight and task drift prevention",
+      "enabled": true,
+      "endpoint": "http://localhost:8003",
+      "features": [
+        "task_monitoring",
+        "drift_detection",
+        "strategic_planning"
+      ],
+      "config": {
+        "monitoring_interval": 5,
+        "drift_threshold": 0.3,
+        "intervention_mode": "suggest"
+      }
+    },
+    "vector_context": {
+      "name": "Vector DB Context Manager",
+      "description": "RAG-based context retrieval and management",
+      "enabled": true,
+      "endpoint": "http://localhost:6333",
+      "features": [
+        "semantic_search",
+        "context_compression",
+        "relevance_ranking"
+      ],
+      "config": {
+        "embedding_model": "chutes",
+        "chunk_size": 1024,
+        "overlap": 128,
+        "top_k": 10
+      }
+    }
+  },
+  "integration_settings": {
+    "enable_all": true,
+    "fallback_mode": "graceful",
+    "retry_attempts": 3,
+    "timeout_seconds": 30,
+    "log_level": "info"
+  },
+  "chain_of_thought_config": {
+    "enhanced_prompting": true,
+    "reasoning_templates": [
+      {
+        "name": "software_development",
+        "template": "1. Understand requirements\n2. Analyze existing code\n3. Plan implementation\n4. Code incrementally\n5. Test thoroughly\n6. Document changes"
+      },
+      {
+        "name": "debugging",
+        "template": "1. Reproduce issue\n2. Identify root cause\n3. Develop fix\n4. Test fix\n5. Verify no regressions"
+      },
+      {
+        "name": "refactoring",
+        "template": "1. Identify code smells\n2. Plan refactoring strategy\n3. Create tests\n4. Refactor incrementally\n5. Verify functionality"
+      }
+    ],
+    "auto_select_template": true
+  },
+  "performance_optimizations": {
+    "parallel_tool_calls": true,
+    "batch_processing": true,
+    "cache_results": true,
+    "compression_enabled": true
+  }
+}

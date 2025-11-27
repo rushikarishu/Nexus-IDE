@@ -1,0 +1,262 @@
+
+> nexus-ide@0.1.0 test
+> vitest
+
+
+[1m[46m RUN [49m[22m [36mv4.0.10 [39m[90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide[39m
+
+[90mstderr[2m | src/lib/lsp.test.ts[2m > [22m[2mshutdownAllLspClients[2m > [22m[2mshould handle shutdown failures gracefully
+[22m[39mFailed to shutdown rust LSP: Error: Shutdown failed
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/lib/lsp.test.ts:325:38
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+ [32m✓[39m src/lib/lsp.test.ts [2m([22m[2m16 tests[22m[2m)[22m[32m 197[2mms[22m[39m
+[90mstderr[2m | src/hooks/usePlugins.test.ts[2m > [22m[2musePlugins[2m > [22m[2mmarks plugin as inactive and records error when script loading fails
+[22m[39mFailed to load plugin Broken Plugin: Error: Script error
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/usePlugins.test.ts:75:36
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+[90mstderr[2m | src/hooks/usePlugins.test.ts[2m > [22m[2musePlugins[2m > [22m[2mshows toast error when fetching plugins fails
+[22m[39mFailed to fetch plugins: Error: List failed
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/usePlugins.test.ts:89:42
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+ [32m✓[39m src/hooks/usePlugins.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 216[2mms[22m[39m
+[90mstderr[2m | src/components/Editor.rename.test.tsx[2m > [22m[2mEditor - Rename Symbol[2m > [22m[2mshould handle rename LSP request and return workspace edits
+[22m[39mLSP Rename Error: TypeError: monaco.editor.getModel is not a function
+    at Object.provideRenameEdits [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:343:53[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.rename.test.tsx:141:24
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:20
+
+[90mstderr[2m | src/hooks/useAISession.test.ts[2m > [22m[2museAISession[2m > [22m[2msendPrompt[2m > [22m[2mshould handle send errors
+[22m[39mAI Error: Error: Network error
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/useAISession.test.ts:111:40
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+
+[90mstderr[2m | src/components/Editor.rename.test.tsx[2m > [22m[2mEditor - Rename Symbol[2m > [22m[2mshould handle rename errors gracefully
+[22m[39mLSP Rename Error: Error: LSP not available
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.rename.test.tsx:164:47
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+
+ [31m❯[39m src/components/Editor.rename.test.tsx [2m([22m[2m5 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 148[2mms[22m[39m
+     [32m✓[39m should register rename provider when lspKey is provided[32m 48[2mms[22m[39m
+[31m     [31m×[31m should handle rename LSP request and return workspace edits[39m[32m 46[2mms[22m[39m
+     [32m✓[39m should handle rename errors gracefully[32m 24[2mms[22m[39m
+     [32m✓[39m should return null when LSP returns no changes[32m 17[2mms[22m[39m
+     [32m✓[39m should add rename action with F2 keybinding[32m 9[2mms[22m[39m
+ [32m✓[39m src/components/DebugPanel.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 214[2mms[22m[39m
+ [32m✓[39m src/hooks/useAISession.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 253[2mms[22m[39m
+[90mstderr[2m | src/components/TaskRunnerPanel.test.tsx[2m > [22m[2mTaskRunnerPanel[2m > [22m[2mshould display error when loading tasks fails
+[22m[39mFailed to load tasks: Failed to load tasks
+
+ [32m✓[39m src/components/TestExplorer.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 239[2mms[22m[39m
+ [32m✓[39m src/components/GitBranches.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 155[2mms[22m[39m
+ [31m❯[39m src/components/Editor.codeActions.test.tsx [2m([22m[2m5 tests[22m[2m | [22m[31m5 failed[39m[2m)[22m[32m 145[2mms[22m[39m
+[31m     [31m×[31m should register code action provider[39m[32m 82[2mms[22m[39m
+[31m     [31m×[31m should fetch LSP code actions and merge with AI actions[39m[32m 14[2mms[22m[39m
+[31m     [31m×[31m should include diagnostics in LSP code action request[39m[32m 15[2mms[22m[39m
+[31m     [31m×[31m should convert LSP workspace edits to Monaco format[39m[32m 15[2mms[22m[39m
+[31m     [31m×[31m should handle LSP code action errors gracefully[39m[32m 17[2mms[22m[39m
+ [31m❯[39m src/components/Editor.navigation.test.tsx [2m([22m[2m8 tests[22m[2m | [22m[31m8 failed[39m[2m)[22m[32m 79[2mms[22m[39m
+[31m     [31m×[31m should add Go to Definition action with F12 keybinding[39m[32m 46[2mms[22m[39m
+[31m     [31m×[31m should dispatch editor-navigate event on Go to Definition[39m[32m 4[2mms[22m[39m
+[31m     [31m×[31m should add Peek Definition action with Alt+F12 keybinding[39m[32m 5[2mms[22m[39m
+[31m     [31m×[31m should show peek view on Peek Definition[39m[32m 4[2mms[22m[39m
+[31m     [31m×[31m should add Go to References action with Shift+F12 keybinding[39m[32m 4[2mms[22m[39m
+[31m     [31m×[31m should dispatch editor-navigate event on Go to References[39m[32m 4[2mms[22m[39m
+[31m     [31m×[31m should add Peek References action[39m[32m 4[2mms[22m[39m
+[31m     [31m×[31m should show peek view on Peek References[39m[32m 3[2mms[22m[39m
+[90mstderr[2m | src/components/TaskRunnerPanel.test.tsx[2m > [22m[2mTaskRunnerPanel[2m > [22m[2mshould handle task run failure
+[22m[39mFailed to run task: Task execution failed
+
+ [32m✓[39m src/components/Sidebar.test.tsx [2m([22m[2m15 tests[22m[2m)[22m[33m 585[2mms[22m[39m
+ [32m✓[39m src/components/TaskRunnerPanel.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[33m 564[2mms[22m[39m
+ [32m✓[39m src/components/GoToSymbolModal.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[33m 463[2mms[22m[39m
+     [33m[2m✓[22m[39m fetches and displays workspace symbols based on query [33m 414[2mms[22m[39m
+ [32m✓[39m src/components/AIChatPanel.test.tsx [2m([22m[2m19 tests[22m[2m)[22m[33m 472[2mms[22m[39m
+[90mstderr[2m | src/components/SourceControlPanel.test.tsx[2m > [22m[2mSourceControlPanel[2m > [22m[2mshould show alert on commit failure
+[22m[39mFailed to commit: Commit failed
+
+ [32m✓[39m src/components/SourceControlPanel.test.tsx [2m([22m[2m13 tests[22m[2m)[22m[33m 858[2mms[22m[39m
+[90mstderr[2m | src/components/SearchPanel.test.tsx[2m > [22m[2mSearchPanel[2m > [22m[2mshould show error message on search failure
+[22m[39mSearch failed: Search failed
+
+ [32m✓[39m src/components/PluginsPanel.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 203[2mms[22m[39m
+ [32m✓[39m src/test/AiEditorWorkflow.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 136[2mms[22m[39m
+ [32m✓[39m src/hooks/useDiagnostics.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 150[2mms[22m[39m
+ [32m✓[39m src/components/GitStashList.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 142[2mms[22m[39m
+ [32m✓[39m src/hooks/useNavigationHistory.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 84[2mms[22m[39m
+ [32m✓[39m src/components/SearchPanel.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[33m 2041[2mms[22m[39m
+     [33m[2m✓[22m[39m should debounce search requests [33m 327[2mms[22m[39m
+     [33m[2m✓[22m[39m should display search results [33m 332[2mms[22m[39m
+     [33m[2m✓[22m[39m should handle case sensitive search [33m 307[2mms[22m[39m
+     [33m[2m✓[22m[39m should handle replace all [33m 312[2mms[22m[39m
+ [32m✓[39m src/components/OutlinePanel.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 117[2mms[22m[39m
+[90mstderr[2m | src/hooks/useTerminalState.test.ts[2m > [22m[2museTerminalState[2m > [22m[2mshould handle run_file failure by writing to terminal
+[22m[39mFailed to run file: Error: Run failed
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/useTerminalState.test.ts:163:23
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+[90mstderr[2m | src/hooks/useTerminalState.test.ts[2m > [22m[2museTerminalState[2m > [22m[2mshould fallback to toast if writing to terminal fails
+[22m[39mFailed to run file: Error: Run failed
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/hooks/useTerminalState.test.ts:189:23
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+    at runFiles [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1526:3[90m)[39m
+
+ [32m✓[39m src/hooks/useTerminalState.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 113[2mms[22m[39m
+[90mstdout[2m | src/hooks/useFileSystem.test.ts[2m > [22m[2museFileSystem[2m > [22m[2mshould auto-save after delay
+[22m[39mAuto-saved: /test/file.rs
+
+ [32m✓[39m src/hooks/useFileSystem.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 87[2mms[22m[39m
+ [32m✓[39m src/hooks/useLspErrors.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 57[2mms[22m[39m
+[90mstdout[2m | src/test/RunWorkflow.test.tsx[2m > [22m[2mRun Workflow Integration[2m > [22m[2mshould initialize terminal and run file when Run button is clicked
+[22m[39m[Terminal] Component rendered, visible: [33mtrue[39m
+
+[90mstdout[2m | src/test/RunWorkflow.test.tsx[2m > [22m[2mRun Workflow Integration[2m > [22m[2mshould initialize terminal and run file when Run button is clicked
+[22m[39m[Terminal] Component rendered, visible: [33mtrue[39m
+
+[90mstdout[2m | src/test/RunWorkflow.test.tsx[2m > [22m[2mRun Workflow Integration[2m > [22m[2mshould initialize terminal and run file when Run button is clicked
+[22m[39m[Terminal] Component rendered, visible: [33mtrue[39m
+
+ [32m✓[39m src/test/RunWorkflow.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 58[2mms[22m[39m
+[90mstderr[2m | src/components/Editor.test.tsx[2m > [22m[2mEditor - LSP providers and AI actions[2m > [22m[2mtriggers AI inline actions via CodeAction provider and onTriggerAI callback
+[22m[39mLSP Code Action Error: TypeError: Cannot read properties of undefined (reading 'Auto')
+    at Object.provideCodeActions [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:471:105[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.test.tsx:216:39
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+
+[90mstderr[2m | src/components/Editor.test.tsx[2m > [22m[2mEditor - LSP providers and AI actions[2m > [22m[2mtriggers AI fix action for diagnostics
+[22m[39mLSP Code Action Error: TypeError: Cannot read properties of undefined (reading 'Auto')
+    at Object.provideCodeActions [90m(/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.tsx:471:105[90m)[39m
+    at [90m/home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39msrc/components/Editor.test.tsx:255:39
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:157:11
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:753:26
+    at [90mfile:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1636:20
+    at new Promise (<anonymous>)
+    at runWithTimeout [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1602:10[90m)[39m
+    at runTest [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1309:12[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at runSuite [90m(file:///home/projectbasecamp/Desktop/Griffindor/nexus-ide/[39mnode_modules/[4m@vitest[24m/runner/dist/index.js:1468:8[90m)[39m
+
+ [32m✓[39m src/components/Editor.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 76[2mms[22m[39m
+ [32m✓[39m src/components/GitHistory.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 52[2mms[22m[39m
+ [32m✓[39m src/hooks/useDebounce.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m src/components/StatusBar.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 53[2mms[22m[39m
+ [32m✓[39m src/lib/pluginSystem.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 14 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/components/Editor.codeActions.test.tsx[2m > [22mEditor - LSP Code Actions[2m > [22mshould register code action provider
+[41m[1m FAIL [22m[49m src/components/Editor.codeActions.test.tsx[2m > [22mEditor - LSP Code Actions[2m > [22mshould fetch LSP code actions and merge with AI actions
+[41m[1m FAIL [22m[49m src/components/Editor.codeActions.test.tsx[2m > [22mEditor - LSP Code Actions[2m > [22mshould include diagnostics in LSP code action request
+[41m[1m FAIL [22m[49m src/components/Editor.codeActions.test.tsx[2m > [22mEditor - LSP Code Actions[2m > [22mshould convert LSP workspace edits to Monaco format
+[41m[1m FAIL [22m[49m src/components/Editor.codeActions.test.tsx[2m > [22mEditor - LSP Code Actions[2m > [22mshould handle LSP code action errors gracefully
+[41m[1m FAIL [22m[49m src/components/Editor.navigation.test.tsx[2m > [22mEditor - Go To/Peek Definition and References[2m > [22mshould add Go to Definition action with F12 keybinding
+[41m[1m FAIL [22m[49m src/components/Editor.navigation.test.tsx[2m > [22mEditor - Go To/Peek Definition and References[2m > [22mshould dispatch editor-navigate event on Go to Definition
+[41m[1m FAIL [22m[49m src/components/Editor.navigation.test.tsx[2m > [22mEditor - Go To/Peek Definition and References[2m > [22mshould add Peek Definition action with Alt+F12 keybinding
+[41m[1m FAIL [22m[49m src/components/Editor.navigation.test.tsx[2m > [22mEditor - Go To/Peek Definition and References[2m > [22mshould show peek view on Peek Definition
+[41m[1m FAIL [22m[49m src/components/Editor.navigation.test.tsx[2m > [22mEditor - Go To/Peek Definition and References[2m > [22mshould add Go to References action with Shift+F12 keybinding
+[41m[1m FAIL [22m[49m src/components/Editor.navigation.test.tsx[2m > [22mEditor - Go To/Peek Definition and References[2m > [22mshould dispatch editor-navigate event on Go to References
+[41m[1m FAIL [22m[49m src/components/Editor.navigation.test.tsx[2m > [22mEditor - Go To/Peek Definition and References[2m > [22mshould add Peek References action
+[41m[1m FAIL [22m[49m src/components/Editor.navigation.test.tsx[2m > [22mEditor - Go To/Peek Definition and References[2m > [22mshould show peek view on Peek References
+[31m[1mError[22m: useToast must be used within a ToastProvider[39m
+[36m [2m❯[22m useToast src/components/Toast.tsx:[2m25:15[22m[39m
+    [90m 23| [39m    [35mconst[39m context [33m=[39m [34museContext[39m([33mToastContext[39m)[33m;[39m
+    [90m 24| [39m    [35mif[39m ([33m![39mcontext) {
+    [90m 25| [39m        throw new Error("useToast must be used within a ToastProvider"…
+    [90m   | [39m              [31m^[39m
+    [90m 26| [39m    }
+    [90m 27| [39m    [35mreturn[39m context[33m;[39m
+[90m [2m❯[22m Editor src/components/Editor.tsx:[2m78:26[22m[39m
+[90m [2m❯[22m Object.react_stack_bottom_frame node_modules/react-dom/cjs/react-dom-client.development.js:[2m25904:20[22m[39m
+[90m [2m❯[22m renderWithHooks node_modules/react-dom/cjs/react-dom-client.development.js:[2m7662:22[22m[39m
+[90m [2m❯[22m updateFunctionComponent node_modules/react-dom/cjs/react-dom-client.development.js:[2m10166:19[22m[39m
+[90m [2m❯[22m beginWork node_modules/react-dom/cjs/react-dom-client.development.js:[2m11778:18[22m[39m
+[90m [2m❯[22m runWithFiberInDEV node_modules/react-dom/cjs/react-dom-client.development.js:[2m874:13[22m[39m
+[90m [2m❯[22m performUnitOfWork node_modules/react-dom/cjs/react-dom-client.development.js:[2m17641:22[22m[39m
+[90m [2m❯[22m workLoopSync node_modules/react-dom/cjs/react-dom-client.development.js:[2m17469:41[22m[39m
+[90m [2m❯[22m renderRootSync node_modules/react-dom/cjs/react-dom-client.development.js:[2m17450:11[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/14]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m src/components/Editor.rename.test.tsx[2m > [22mEditor - Rename Symbol[2m > [22mshould handle rename LSP request and return workspace edits
+[31m[1mAssertionError[22m: Target cannot be null or undefined.[39m
+[36m [2m❯[22m src/components/Editor.rename.test.tsx:[2m150:31[22m[39m
+    [90m148| [39m
+    [90m149| [39m        [34mexpect[39m(result)[33m.[39m[34mtoBeDefined[39m()[33m;[39m
+    [90m150| [39m        [34mexpect[39m(result[33m?.[39medits)[33m.[39m[34mtoHaveLength[39m([34m1[39m)[33m;[39m
+    [90m   | [39m                              [31m^[39m
+    [90m151| [39m        [34mexpect[39m(result[33m?.[39medits[[34m0[39m][33m.[39mtextEdit[33m.[39mtext)[33m.[39m[34mtoBe[39m([32m'new_name'[39m)[33m;[39m
+    [90m152| [39m    })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/14]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m3 failed[39m[22m[2m | [22m[1m[32m27 passed[39m[22m[90m (30)[39m
+[2m      Tests [22m [1m[31m14 failed[39m[22m[2m | [22m[1m[32m174 passed[39m[22m[90m (188)[39m
+[2m   Start at [22m 08:41:14
+[2m   Duration [22m 5.61s[2m (transform 4.28s, setup 4.53s, collect 17.19s, tests 7.98s, environment 36.03s, prepare 561ms)[22m
+
