@@ -2,6 +2,8 @@ use std::process::Command;
 use std::sync::Arc;
 use ide_core::AppState;
 use crate::validate_path;
+use regex::Regex;
+use crate::constants::git::*;
 
 #[derive(serde::Serialize, Debug)]
 pub struct GitFileStatus {
@@ -14,6 +16,82 @@ pub struct GitFileStatus {
 pub struct GitStatus {
     pub branch: String,
     pub files: Vec<GitFileStatus>,
+}
+
+/// Validates a git branch name against security constraints
+fn validate_branch_name(name: &str) -> Result<(), String> {
+    if name.is_empty() {
+        return Err("Branch name cannot be empty".to_string());
+    }
+    
+    if name.len() > MAX_BRANCH_NAME_LEN {
+        return Err(format!(
+            "Branch name too long: {} characters (max {})",
+            name.len(),
+            MAX_BRANCH_NAME_LEN
+        ));
+    }
+    
+    let pattern = Regex::new(crate::constants::patterns::BRANCH_NAME_PATTERN).map_err(|e| e.to_string())?;
+    if !pattern.is_match(name) {
+        return Err(format!(
+            "Invalid branch name '{}': only alphanumeric characters, slashes, dashes, underscores, and dots are allowed",
+            name
+        ));
+    }
+    
+    if name.starts_with('-') {
+        return Err("Branch name cannot start with dash (prevents argument injection)".to_string());
+    }
+    
+    Ok(())
+}
+
+/// Sanitizes a commit message
+fn sanitize_commit_message(message: &str) -> Result<String, String> {
+    if message.is_empty() {
+        return Err("Commit message cannot be empty".to_string());
+    }
+    
+    if message.len() > MAX_COMMIT_MESSAGE_LEN {
+        return Err(format!(
+            "Commit message too long: {} characters (max {})",
+            message.len(),
+            MAX_COMMIT_MESSAGE_LEN
+        ));
+    }
+    
+    for forbidden in crate::constants::patterns::COMMIT_MESSAGE_FORBIDDEN_CHARS {
+        if message.contains(*forbidden) {
+            return Err(format!(
+                "Commit message contains forbidden character '{}' (potential command injection)",
+                forbidden
+            ));
+        }
+    }
+    
+    Ok(message.to_string())
+}
+
+/// Validates a file path for git operations
+fn validate_git_path(path: &str) -> Result<(), String> {
+    if path.is_empty() {
+        return Err("File path cannot be empty".to_string());
+    }
+    
+    if path.len() > MAX_FILE_PATH_LEN {
+        return Err(format!(
+            "File path too long: {} characters (max {})",
+            path.len(),
+            MAX_FILE_PATH_LEN
+        ));
+    }
+    
+    if path.contains('\0') {
+        return Err("File path contains null byte".to_string());
+    }
+    
+    Ok(())
 }
 
 fn run_git(args: &[&str], cwd: &std::path::Path) -> Result<String, String> {
@@ -163,8 +241,15 @@ pub fn git_checkout_branch_impl(path: &str, branch_name: &str, state: &Arc<AppSt
 }
 
 #[tauri::command]
-pub fn git_checkout_branch(path: &str, branch_name: &str, state: tauri::State<'_, Arc<AppState>>) -> Result<(), String> {
-    git_checkout_branch_impl(path, branch_name, &state)
+pub fn git_checkout_branch(repo_path: String, branch_name: String) -> Result<(), String> {
+    tracing::info!(repo_path = %repo_path, branch = %branch_name, "Checking out branch");
+    
+    // Validate branch name before using it
+    validate_branch_name(&branch_name)?;
+    
+    let path = std::path::Path::new(&repo_path);
+    run_git(&["checkout", &branch_name], path)?;
+    Ok(())
 }
 
 pub fn git_create_branch_impl(path: &str, branch_name: &str, state: &Arc<AppState>) -> Result<(), String> {
@@ -173,8 +258,15 @@ pub fn git_create_branch_impl(path: &str, branch_name: &str, state: &Arc<AppStat
 }
 
 #[tauri::command]
-pub fn git_create_branch(path: &str, branch_name: &str, state: tauri::State<'_, Arc<AppState>>) -> Result<(), String> {
-    git_create_branch_impl(path, branch_name, &state)
+pub fn git_create_branch(repo_path: String, branch_name: String) -> Result<(), String> {
+    tracing::info!(repo_path = %repo_path, branch = %branch_name, "Creating branch");
+    
+    // Validate branch name before using it
+    validate_branch_name(&branch_name)?;
+    
+    let path = std::path::Path::new(&repo_path);
+    run_git(&["checkout", "-b", &branch_name], path)?;
+    Ok(())
 }
 
 pub fn git_delete_branch_impl(path: &str, branch_name: &str, state: &Arc<AppState>) -> Result<(), String> {
@@ -183,8 +275,16 @@ pub fn git_delete_branch_impl(path: &str, branch_name: &str, state: &Arc<AppStat
 }
 
 #[tauri::command]
-pub fn git_delete_branch(path: &str, branch_name: &str, state: tauri::State<'_, Arc<AppState>>) -> Result<(), String> {
-    git_delete_branch_impl(path, branch_name, &state)
+pub fn git_delete_branch(repo_path: String, branch_name: String, force: bool) -> Result<(), String> {
+    tracing::info!(repo_path = %repo_path, branch = %branch_name, force = force, "Deleting branch");
+    
+    // Validate branch name before using it
+    validate_branch_name(&branch_name)?;
+    
+    let path = std::path::Path::new(&repo_path);
+    let flag = if force { "-D" } else { "-d" };
+    run_git(&["branch", flag, &branch_name], path)?;
+    Ok(())
 }
 
 #[derive(serde::Serialize, Debug)]
@@ -226,8 +326,38 @@ pub fn git_log_impl(path: &str, limit: Option<usize>, file_path: Option<String>,
 }
 
 #[tauri::command]
-pub fn git_log(path: &str, limit: Option<usize>, file_path: Option<String>, state: tauri::State<'_, Arc<AppState>>) -> Result<Vec<GitCommit>, String> {
-    git_log_impl(path, limit, file_path, &state)
+pub fn git_log(repo_path: String, limit: Option<usize>, file_path: Option<String>) -> Result<Vec<GitCommit>, String> {
+    tracing::info!(repo_path = %repo_path, limit = ?limit, file_path = ?file_path, "Getting git log");
+    if let Some(ref f) = file_path {
+        validate_git_path(f)?;
+    }
+    let path = std::path::Path::new(&repo_path);
+    let mut args = vec!["log", "--pretty=format:%H|%an|%ad|%s", "--date=short"];
+    
+    let limit_str = limit.unwrap_or(50).to_string();
+    args.push("-n");
+    args.push(&limit_str);
+
+    if let Some(f) = &file_path {
+        args.push("--");
+        args.push(f);
+    }
+
+    let output = run_git(&args, path)?;
+    let mut commits = Vec::new();
+    
+    for line in output.lines() {
+        let parts: Vec<&str> = line.split('|').collect();
+        if parts.len() >= 4 {
+            commits.push(GitCommit {
+                hash: parts[0].to_string(),
+                author: parts[1].to_string(),
+                date: parts[2].to_string(),
+                message: parts[3..].join("|"),
+            });
+        }
+    }
+    Ok(commits)
 }
 
 #[derive(serde::Serialize, Debug)]
@@ -280,8 +410,47 @@ pub fn git_blame_impl(path: &str, file_path: &str, state: &Arc<AppState>) -> Res
 }
 
 #[tauri::command]
-pub fn git_blame(path: &str, file_path: &str, state: tauri::State<'_, Arc<AppState>>) -> Result<Vec<GitBlame>, String> {
-    git_blame_impl(path, file_path, &state)
+pub fn git_blame(repo_path: String, file_path: String) -> Result<Vec<GitBlame>, String> {
+    tracing::info!(repo_path = %repo_path, file_path = %file_path, "Getting git blame");
+    validate_git_path(&file_path)?;
+    let path = std::path::Path::new(&repo_path);
+    let output = run_git(&["blame", "--porcelain", &file_path], path)?;
+    
+    let mut blames = Vec::new();
+    let mut current_hash = String::new();
+    let mut current_author = String::new();
+    let mut current_summary = String::new();
+    let mut current_line_num = 0;
+    
+    for line in output.lines() {
+        if line.starts_with('\t') {
+            if current_line_num > 0 {
+                blames.push(GitBlame {
+                    line: current_line_num,
+                    commit_hash: current_hash.clone(),
+                    author: current_author.clone(),
+                    summary: current_summary.clone(),
+                });
+            }
+            continue;
+        }
+        
+        let parts: Vec<&str> = line.split_whitespace().collect();
+        if parts.is_empty() { continue; }
+        
+        if parts[0].len() == 40 {
+            current_hash = parts[0].to_string();
+            if parts.len() >= 3 {
+                current_line_num = parts[2].parse().unwrap_or(0);
+            }
+        } else if line.starts_with("author ") {
+            current_author = line[7..].to_string();
+        } else if line.starts_with("summary ") {
+            current_summary = line[8..].to_string();
+        }
+    }
+    
+    Ok(blames)
 }
 
 #[derive(serde::Serialize, Debug)]
@@ -309,8 +478,20 @@ pub fn git_stash_save_impl(path: &str, message: Option<String>, state: &Arc<AppS
 }
 
 #[tauri::command]
-pub fn git_stash_save(path: &str, message: Option<String>, state: tauri::State<'_, Arc<AppState>>) -> Result<(), String> {
-    git_stash_save_impl(path, message, &state)
+pub fn git_stash_save(repo_path: String, message: Option<String>) -> Result<(), String> {
+    tracing::info!(repo_path = %repo_path, message = ?message, "Saving git stash");
+    let path = std::path::Path::new(&repo_path);
+    let mut args = vec!["stash", "push"];
+    
+    let sanitized_message;
+    if let Some(msg) = message {
+        sanitized_message = sanitize_commit_message(&msg)?;
+        args.push("-m");
+        args.push(&sanitized_message);
+    }
+    
+    run_git(&args, path)?;
+    Ok(())
 }
 
 pub fn git_stash_list_impl(path: &str, state: &Arc<AppState>) -> Result<Vec<GitStash>, String> {
@@ -344,8 +525,12 @@ pub fn git_stash_apply_impl(path: &str, index: usize, state: &Arc<AppState>) -> 
 }
 
 #[tauri::command]
-pub fn git_stash_apply(path: &str, index: usize, state: tauri::State<'_, Arc<AppState>>) -> Result<(), String> {
-    git_stash_apply_impl(path, index, &state)
+pub fn git_stash_apply(repo_path: String, index: usize) -> Result<(), String> {
+    tracing::info!(repo_path = %repo_path, index = index, "Applying git stash");
+    let path = std::path::Path::new(&repo_path);
+    let stash_ref = format!("stash@{{{}}}", index);
+    run_git(&["stash", "apply", &stash_ref], path)?;
+    Ok(())
 }
 
 pub fn git_stash_drop_impl(path: &str, index: usize, state: &Arc<AppState>) -> Result<(), String> {
@@ -355,9 +540,15 @@ pub fn git_stash_drop_impl(path: &str, index: usize, state: &Arc<AppState>) -> R
 }
 
 #[tauri::command]
-pub fn git_stash_drop(path: &str, index: usize, state: tauri::State<'_, Arc<AppState>>) -> Result<(), String> {
-    git_stash_drop_impl(path, index, &state)
+pub fn git_stash_drop(repo_path: String, index: usize) -> Result<(), String> {
+    tracing::info!(repo_path = %repo_path, index = index, "Dropping git stash");
+    let path = std::path::Path::new(&repo_path);
+    let stash_ref = format!("stash@{{{}}}", index);
+    run_git(&["stash", "drop", &stash_ref], path)?;
+    Ok(())
 }
+
+
 
 #[cfg(test)]
 mod tests {
@@ -565,6 +756,28 @@ mod tests {
         git_stash_apply_impl(&path_str, 0, &state).unwrap();
         let content = fs::read_to_string(root.join("file.txt")).unwrap();
         assert_eq!(content, "modified");
+    }
+
+    #[test]
+    fn test_git_validation() {
+        // Test validation functions directly
+        
+        // Invalid branch name
+        let err = validate_branch_name("invalid;command").unwrap_err();
+        assert!(err.contains("Invalid branch name"));
+        
+        let err = validate_branch_name("-dash").unwrap_err();
+        assert!(err.contains("cannot start with dash"));
+        
+        // Valid branch name
+        assert!(validate_branch_name("feature/new-thing").is_ok());
+        
+        // Invalid commit message
+        let err = sanitize_commit_message("msg; rm -rf /").unwrap_err();
+        assert!(err.contains("forbidden character"));
+        
+        // Valid commit message
+        assert!(sanitize_commit_message("Initial commit").is_ok());
     }
 }
 

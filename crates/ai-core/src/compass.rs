@@ -239,9 +239,8 @@ impl CompassAgent {
             actor: "system".to_string(),
             action: "compass_start".to_string(),
             details: serde_json::json!({ "query": query }),
-        });
-
-        // Initialize context (optionally embedding query)
+            signature: None,
+        }); // Initialize context (optionally embedding query)
         let mut context = self.context_manager.initialize(&query, &self.config.session_id, &self.context_store, &self.embedding_provider).await?;
         if let Some(tx) = &event_tx {
             let _ = tx.send(CompassEvent::ContextUpdate(context.clone())).await;
@@ -280,6 +279,7 @@ impl CompassAgent {
                     "action": step_result.action,
                     "observation": step_result.observation,
                 }),
+                signature: None,
             });
 
             // 3. Meta-Thinker monitors and decides
@@ -299,6 +299,7 @@ impl CompassAgent {
                     "turn": turn,
                     "decision": format!("{:?}", decision),
                 }),
+                signature: None,
             });
 
             match decision {
@@ -320,6 +321,7 @@ impl CompassAgent {
                             actor: "assistant".to_string(),
                             action: "compass_complete".to_string(),
                             details: serde_json::json!({ "answer": answer }),
+                            signature: None,
                         });
                     }
                     
@@ -354,6 +356,7 @@ impl CompassAgent {
             actor: "system".to_string(),
             action: "compass_timeout".to_string(),
             details: serde_json::json!({ "max_turns": self.config.max_turns }),
+            signature: None,
         });
         
         let err_msg = "Max turns reached".to_string();

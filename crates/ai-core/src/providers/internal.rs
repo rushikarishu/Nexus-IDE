@@ -1,11 +1,13 @@
 use async_trait::async_trait;
 use crate::provider::{LLMProvider, CompletionRequest};
 use crate::error::ProviderError;
+use crate::utils::SecretString;
+use bytes::Bytes;
 
 pub struct InternalConfig {
     pub endpoint: String,
     pub model: String,
-    pub auth_token: Option<String>,
+    pub auth_token: Option<SecretString>,
 }
 
 impl Default for InternalConfig {
@@ -18,21 +20,27 @@ impl Default for InternalConfig {
             // Prioritize CHUTES_API_TOKEN, fallback to INTERNAL_LLM_TOKEN
             auth_token: std::env::var("CHUTES_API_TOKEN")
                 .or_else(|_| std::env::var("INTERNAL_LLM_TOKEN"))
-                .ok(),
+                .ok()
+                .map(SecretString::new),
         }
     }
 }
 
 pub struct InternalProvider {
     config: InternalConfig,
-
+    client: reqwest::Client,
 }
 
 impl InternalProvider {
     pub fn new() -> Self {
+        let client = reqwest::Client::builder()
+            .timeout(std::time::Duration::from_secs(120))
+            .build()
+            .unwrap_or_else(|_| reqwest::Client::new());
+            
         Self {
             config: InternalConfig::default(),
-
+            client,
         }
     }
 }
@@ -47,10 +55,8 @@ impl LLMProvider for InternalProvider {
         })?;
 
         let payload = self.build_payload(request, false);
-        let client = reqwest::Client::builder()
-            .timeout(std::time::Duration::from_secs(120))
-            .build()
-            .map_err(|e| ProviderError::Configuration(format!("Failed to build client: {}", e)))?;
+        // Use shared client
+        let client = &self.client;
         
         let mut attempt = 0;
         let max_retries = 10;
@@ -58,7 +64,7 @@ impl LLMProvider for InternalProvider {
 
         loop {
             let response = client.post(&self.config.endpoint)
-                .header("Authorization", format!("Bearer {}", api_token))
+                .header("Authorization", format!("Bearer {}", api_token.expose_secret()))
                 .header("Content-Type", "application/json")
                 .json(&payload)
                 .send()
@@ -120,14 +126,13 @@ impl LLMProvider for InternalProvider {
 
         let payload = self.build_payload(request, true);
 
-        let client = reqwest::Client::new();
-        let mut response = client.post(&self.config.endpoint)
-            .header("Authorization", format!("Bearer {}", api_token))
-            .header("Content-Type", "application/json")
+        // Use shared client
+        let mut response = self.client.post(&self.config.endpoint)
+            .header("Authorization", format!("Bearer {}", api_token.expose_secret()))
             .json(&payload)
             .send()
             .await
-            .map_err(|e| ProviderError::Network(e.to_string()))?;
+            .map_err(|e| ProviderError::Server(e.to_string()))?;
 
         if !response.status().is_success() {
             let status = response.status();

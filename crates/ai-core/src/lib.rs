@@ -13,3 +13,4 @@ pub mod audit;
 pub mod compass;
 pub mod rag;
 pub mod providers;
+pub mod validation;

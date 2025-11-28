@@ -2,9 +2,14 @@ use serde::{Deserialize, Serialize};
 use chrono::{DateTime, Utc};
 use std::path::PathBuf;
 use std::sync::mpsc;
-use std::fs::{OpenOptions};
+use std::fs::{OpenOptions, File};
 use std::io::Write;
 use std::thread;
+use std::os::unix::fs::OpenOptionsExt;
+use hmac::{Hmac, Mac};
+use sha2::Sha256;
+
+type HmacSha256 = Hmac<Sha256>;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AuditLog {
@@ -14,6 +19,8 @@ pub struct AuditLog {
     pub actor: String, // "user", "assistant", "system", "tool"
     pub action: String, // "message", "tool_call", "tool_result", "error"
     pub details: serde_json::Value,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub signature: Option<String>,
 }
 
 pub trait AuditLogger: Send + Sync {
@@ -30,13 +37,20 @@ impl AsyncAuditLogger {
     pub fn new(file_path: PathBuf) -> Result<Self, std::io::Error> {
         let (tx, rx) = mpsc::channel::<AuditLog>();
         
+        // Get HMAC key from env or generate a random one (in production, must be persistent)
+        let hmac_key = std::env::var("AUDIT_HMAC_KEY").unwrap_or_else(|_| "default-insecure-key-change-me".to_string());
+        
         // Spawn background thread for file writes
         thread::spawn(move || {
             let current_path = file_path.clone();
             
-            // Helper to open file in append mode
-            let open_log = |path: &PathBuf| -> Option<std::fs::File> {
-                match OpenOptions::new().create(true).append(true).open(path) {
+            // Helper to open file in append mode with secure permissions
+            let open_log = |path: &PathBuf| -> Option<File> {
+                match OpenOptions::new()
+                    .create(true)
+                    .append(true)
+                    .mode(0o600) // Read/write only for owner
+                    .open(path) {
                     Ok(f) => Some(f),
                     Err(e) => {
                         log::error!("Failed to open audit log file: {}", e);
@@ -50,7 +64,7 @@ impl AsyncAuditLogger {
                 None => return,
             };
 
-            while let Ok(entry) = rx.recv() {
+            while let Ok(mut entry) = rx.recv() {
                 // Check file size and rotate if needed (threshold: 10MB)
                 if let Ok(metadata) = file.metadata() {
                     if metadata.len() > 10 * 1024 * 1024 {
@@ -61,17 +75,10 @@ impl AsyncAuditLogger {
                         let new_name = format!("{}-{}.{}", file_stem, timestamp, extension);
                         let new_path = current_path.with_file_name(new_name);
 
-                        // Close current file (implicitly by dropping or reopening)
-                        // Actually, we need to rename the *current* file to the rotated name, 
-                        // and then open a fresh file at the original path.
-                        // OR we can just close the current one, rename it, and open a new one.
-                        // Renaming an open file works on POSIX but might be tricky on Windows.
-                        // Safer to close, rename, reopen.
                         drop(file); // Close file
 
                         if let Err(e) = std::fs::rename(&current_path, &new_path) {
                             log::error!("Failed to rotate audit log: {}", e);
-                            // Try to reopen original path anyway
                         }
 
                         // Reopen original path (fresh file)
@@ -81,6 +88,20 @@ impl AsyncAuditLogger {
                             return; // Fatal error
                         }
                     }
+                }
+
+                // Sign the entry
+                // We sign the JSON representation of the entry WITHOUT the signature field
+                // Since signature is Option and skipped if None, we can just serialize it as is (it's None by default)
+                // But to be deterministic, we should serialize specific fields or the whole struct with signature=None
+                entry.signature = None;
+                if let Ok(json_bytes) = serde_json::to_vec(&entry) {
+                    let mut mac = HmacSha256::new_from_slice(hmac_key.as_bytes())
+                        .expect("HMAC can take key of any size");
+                    mac.update(&json_bytes);
+                    let result = mac.finalize();
+                    let signature = hex::encode(result.into_bytes());
+                    entry.signature = Some(signature);
                 }
 
                 if let Ok(json) = serde_json::to_string(&entry) {

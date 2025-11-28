@@ -2,9 +2,13 @@ use std::process::{Command, Stdio};
 use std::sync::{Arc, Mutex};
 use std::io::{BufRead, BufReader, Read, Write};
 use std::thread;
+use std::time::Duration;
 use tauri::{Emitter, Window, State};
 use ide_core::AppState;
 use crate::language_config;
+
+/// LSP startup timeout in seconds
+const LSP_STARTUP_TIMEOUT_SECS: u64 = 10;
 
 #[tauri::command]
 pub fn start_lsp(window: Window, state: State<'_, Arc<AppState>>, language: String) -> Result<(), String> {
@@ -21,7 +25,7 @@ pub fn start_lsp(window: Window, state: State<'_, Arc<AppState>>, language: Stri
         }
     }
 
-    // Try to start the LSP server
+    // Try to start the LSP server with timeout
     let mut child = Command::new(lsp_config.command)
         .args(lsp_config.args)
         .stdin(Stdio::piped())
@@ -41,6 +45,25 @@ pub fn start_lsp(window: Window, state: State<'_, Arc<AppState>>, language: Stri
             }));
             error_msg
         })?;
+
+    // Give the LSP server a moment to start
+    thread::sleep(Duration::from_millis(500));
+    
+    // Check if process is still running after startup delay
+    match child.try_wait() {
+        Ok(Some(status)) => {
+            return Err(format!(
+                "LSP server '{}' exited immediately with status: {:?}",
+                lsp_config.command, status
+            ));
+        }
+        Ok(None) => {
+            // Process is running - good!
+        }
+        Err(e) => {
+            return Err(format!("Failed to check LSP server status: {}", e));
+        }
+    }
 
     let stdout = child.stdout.take().ok_or("Failed to open stdout")?;
     let stderr = child.stderr.take().ok_or("Failed to open stderr")?;
@@ -145,9 +168,55 @@ pub fn send_lsp_request(language: String, msg: String, state: State<'_, Arc<AppS
 pub fn shutdown_lsp(language: String, state: State<'_, Arc<AppState>>) -> Result<(), String> {
     tracing::info!(language = %language, "Shutting down LSP");
     let mut processes = state.lsp_processes.write().map_err(|e| e.to_string())?;
-    if let Some(child) = processes.remove(&language) {
-        let mut child = child.lock().map_err(|e| e.to_string())?;
-        child.kill().map_err(|e| e.to_string())?;
+    
+    if let Some(child_arc) = processes.get(&language) {
+        let mut child = child_arc.lock().map_err(|e| e.to_string())?;
+        
+        // Try graceful shutdown first
+        if let Some(stdin) = child.stdin.as_mut() {
+            // Send LSP shutdown request (JSON-RPC)
+            let shutdown_request = serde_json::json!({
+                "jsonrpc": "2.0",
+                "id": 999,
+                "method": "shutdown",
+                "params": null
+            });
+            let shutdown_msg = serde_json::to_string(&shutdown_request).unwrap();
+            let full_msg = format!("Content-Length: {}\r\n\r\n{}", shutdown_msg.len(), shutdown_msg);
+            
+            if stdin.write_all(full_msg.as_bytes()).is_ok() {
+                // Wait a bit for shutdown response
+                thread::sleep(Duration::from_millis(500));
+                
+                // Send exit notification
+                let exit_notification = serde_json::json!({
+                    "jsonrpc": "2.0",
+                    "method": "exit",
+                    "params": null
+                });
+                let exit_msg = serde_json::to_string(&exit_notification).unwrap();
+                let full_exit = format!("Content-Length: {}\r\n\r\n{}", exit_msg.len(), exit_msg);
+                let _ = stdin.write_all(full_exit.as_bytes());
+                
+                // Wait for graceful exit
+                thread::sleep(Duration::from_millis(500));
+            }
+        }
+        
+        // If still running, kill it
+        match child.try_wait() {
+            Ok(Some(_)) => {
+                // Process already exited gracefully
+                tracing::info!(language = %language, "LSP server exited gracefully");
+            }
+            Ok(None) | Err(_) => {
+                // Still running or error checking - force kill
+                tracing::warn!(language = %language, "LSP server did not exit gracefully, forcing kill");
+                child.kill().map_err(|e| e.to_string())?;
+            }
+        }
     }
+    
+    processes.remove(&language);
     Ok(())
 }

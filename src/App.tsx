@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, Suspense, useRef } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { listen } from "@tauri-apps/api/event";
 import { open } from '@tauri-apps/plugin-dialog';
 import "./App.css";
 import {
@@ -100,6 +101,7 @@ function App() {
   // Git State
   const [gitStatus, setGitStatus] = useState<GitStatus | null>(null);
   const [gitBusy, setGitBusy] = useState(false);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const gitStatusRef = useRef<GitStatus | null>(null);
 
   useEffect(() => {
@@ -322,43 +324,25 @@ function App() {
   }, [currentPath, gitBusy]);
 
   useEffect(() => {
-    if (!currentPath || gitBusy) return;
+    if (!currentPath) return;
 
-    let pollInterval = 5000;
-    const maxInterval = 30000;
-    let lastChangeTime = Date.now();
-    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    // Initial fetch
+    void fetchGitStatus();
 
-    const poll = async () => {
-      const previousStatusJson = JSON.stringify(gitStatusRef.current);
-      const currentStatus = await fetchGitStatus();
-      const currentStatusJson = JSON.stringify(currentStatus);
-
-      if (currentStatusJson !== previousStatusJson) {
-        lastChangeTime = Date.now();
-        pollInterval = 5000;
-      } else {
-        const timeSinceChange = Date.now() - lastChangeTime;
-        if (timeSinceChange > 60000) {
-          pollInterval = maxInterval;
-        } else if (timeSinceChange > 30000) {
-          pollInterval = 20000;
-        } else if (timeSinceChange > 15000) {
-          pollInterval = 10000;
-        }
-      }
-
-      timeoutId = setTimeout(poll, pollInterval);
-    };
-
-    void poll();
+    // Listen for file changes
+    const unlistenPromise = listen("file-change", (event) => {
+      // Debounce or just trigger? Backend already debounces.
+      // But multiple events might come in burst.
+      // Let's just trigger refresh.
+      console.log("File change detected:", event.payload);
+      void fetchGitStatus();
+      setRefreshTrigger(prev => prev + 1);
+    });
 
     return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
+      unlistenPromise.then(unlisten => unlisten());
     };
-  }, [currentPath, gitBusy, fetchGitStatus]);
+  }, [currentPath, fetchGitStatus]);
 
   const handleOpenFolder = async () => {
     try {
@@ -646,6 +630,7 @@ function App() {
                 <FileTree
                   workspaceRoots={workspaceRoots}
                   onFileSelect={(path) => fsHandleFileSelect(path).catch(console.error)}
+                  refreshTrigger={refreshTrigger}
                 />
               )}
               {activeTab === "search" && (

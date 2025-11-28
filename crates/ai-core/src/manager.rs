@@ -62,6 +62,7 @@ impl SessionManager {
                     actor: "system".to_string(),
                     action: "session_expired".to_string(),
                     details: serde_json::json!({ "reason": "TTL exceeded" }),
+                    signature: None,
                 });
                 sessions.remove(id);
                 return None;
@@ -83,6 +84,7 @@ impl SessionManager {
                 actor: "system".to_string(),
                 action: "session_deleted".to_string(),
                 details: serde_json::json!({}),
+                signature: None,
             });
             true
         } else {
@@ -108,6 +110,7 @@ impl SessionManager {
                 actor: "system".to_string(),
                 action: "session_expired_cleanup".to_string(),
                 details: serde_json::json!({}),
+                signature: None,
             });
             sessions.remove(id);
         }
@@ -135,6 +138,7 @@ impl SessionManager {
                 actor: "system".to_string(),
                 action: "session_evicted".to_string(),
                 details: serde_json::json!({ "reason": "capacity limit" }),
+                signature: None,
             });
             sessions.remove(&id);
         }
@@ -164,6 +168,17 @@ impl SessionManager {
     }
     
     pub fn add_message(&self, id: &str, message: crate::provider::Message) -> Result<(), String> {
+        // Validate message size to prevent memory issues
+        const MAX_MESSAGE_SIZE: usize = 100 * 1024; // 100KB
+        
+        if message.content.len() > MAX_MESSAGE_SIZE {
+            return Err(format!(
+                "Message too large: {} bytes (max {} bytes)",
+                message.content.len(),
+                MAX_MESSAGE_SIZE
+            ));
+        }
+        
         let mut sessions = self.sessions.write().unwrap();
         if let Some(session) = sessions.get_mut(id) {
             // Audit log before adding
@@ -181,6 +196,7 @@ impl SessionManager {
                 details: serde_json::json!({
                     "content": message.content.clone(),
                 }),
+                signature: None,
             });
             
             session.add_message(message);
@@ -205,6 +221,7 @@ impl SessionManager {
                     "tool": proposal.tool_name,
                     "args": proposal.args,
                 }),
+                signature: None,
             });
 
             session.proposals.insert(proposal.id.clone(), proposal);
@@ -238,6 +255,7 @@ impl SessionManager {
                         "proposal_id": proposal_id,
                         "new_status": format!("{:?}", status),
                     }),
+                    signature: None,
                 });
 
                 proposal.status = status;

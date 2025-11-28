@@ -5,6 +5,10 @@ use reqwest::Client;
 use serde_json::json;
 use uuid::Uuid;
 use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Mutex;
+use std::num::NonZeroUsize;
+use lru::LruCache;
+use crate::utils::SecretString;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct NoteChunk {
@@ -29,7 +33,7 @@ pub trait EmbeddingProvider: Send + Sync {
 
 pub struct ChutesEmbeddingProvider {
     client: Client,
-    api_token: String,
+    api_token: SecretString,
 
 }
 
@@ -37,7 +41,7 @@ impl ChutesEmbeddingProvider {
     pub fn new(api_token: String) -> Self {
         Self {
             client: Client::new(),
-            api_token,
+            api_token: SecretString::new(api_token),
 
         }
     }
@@ -50,7 +54,7 @@ impl EmbeddingProvider for ChutesEmbeddingProvider {
         
         // Batch all texts into a single request
         let response = self.client.post(url)
-            .header("Authorization", format!("Bearer {}", self.api_token))
+            .header("Authorization", format!("Bearer {}", self.api_token.expose_secret()))
             .json(&json!({
                 "input": texts,
                 "model": null
@@ -86,8 +90,9 @@ pub struct QdrantContextStore {
     client: Client,
     url: String,
     collection: String,
-    api_key: Option<String>,
+    api_key: Option<SecretString>,
     collection_ensured: Arc<AtomicBool>,
+    query_cache: Arc<Mutex<LruCache<String, Vec<f32>>>>,
 }
 
 impl QdrantContextStore {
@@ -96,8 +101,9 @@ impl QdrantContextStore {
             client: Client::new(),
             url,
             collection,
-            api_key,
+            api_key: api_key.map(SecretString::new),
             collection_ensured: Arc::new(AtomicBool::new(false)),
+            query_cache: Arc::new(Mutex::new(LruCache::new(NonZeroUsize::new(100).unwrap()))),
         }
     }
 
@@ -110,7 +116,7 @@ impl QdrantContextStore {
         let url = format!("{}/collections/{}", self.url, self.collection);
         let mut request = self.client.get(&url);
         if let Some(key) = &self.api_key {
-            request = request.header("api-key", key);
+            request = request.header("api-key", key.expose_secret());
         }
         
         let response = request.send().await.map_err(|e| e.to_string())?;
@@ -120,14 +126,33 @@ impl QdrantContextStore {
             let create_url = format!("{}/collections/{}", self.url, self.collection);
             let mut create_request = self.client.put(&create_url);
             if let Some(key) = &self.api_key {
-                create_request = create_request.header("api-key", key);
+                create_request = create_request.header("api-key", key.expose_secret());
             }
             
             create_request.json(&json!({
                 "vectors": {
                     "size": vector_size,
                     "distance": "Cosine"
+                },
+                "hnsw_config": {
+                    "m": 16,
+                    "ef_construct": 100
                 }
+            }))
+            .send()
+            .await
+            .map_err(|e| e.to_string())?;
+
+            // Create payload index for session_id
+            let index_url = format!("{}/collections/{}/index", self.url, self.collection);
+            let mut index_request = self.client.put(&index_url);
+            if let Some(key) = &self.api_key {
+                index_request = index_request.header("api-key", key.expose_secret());
+            }
+            
+            index_request.json(&json!({
+                "field_name": "session_id",
+                "field_schema": "keyword"
             }))
             .send()
             .await
@@ -173,7 +198,7 @@ impl ContextStore for QdrantContextStore {
 
         let mut request = self.client.put(&upsert_url);
         if let Some(key) = &self.api_key {
-            request = request.header("api-key", key);
+            request = request.header("api-key", key.expose_secret());
         }
 
         let response = request.json(&json!({
@@ -191,15 +216,31 @@ impl ContextStore for QdrantContextStore {
     }
 
     async fn retrieve_notes(&self, session_id: &str, query: &str, top_k: usize, embedding_provider: &Arc<dyn EmbeddingProvider>) -> Result<Vec<NoteChunk>, String> {
-        // 1. Embed query
-        let embeddings = embedding_provider.embed(&[query.to_string()]).await?;
-        let query_vector = embeddings.first().ok_or("Failed to generate embedding for query")?;
+        // 1. Check cache for query embedding
+        let cached_embedding = {
+            let mut cache = self.query_cache.lock().unwrap();
+            cache.get(query).cloned()
+        };
+
+        let query_vector = if let Some(embedding) = cached_embedding {
+            embedding
+        } else {
+            // Embed query
+            let embeddings = embedding_provider.embed(&[query.to_string()]).await?;
+            let embedding = embeddings.first().ok_or("Failed to generate embedding for query")?.clone();
+            
+            // Update cache
+            let mut cache = self.query_cache.lock().unwrap();
+            cache.put(query.to_string(), embedding.clone());
+            
+            embedding
+        };
 
         // 2. Search Qdrant
         let search_url = format!("{}/collections/{}/points/search", self.url, self.collection);
         let mut request = self.client.post(&search_url);
         if let Some(key) = &self.api_key {
-            request = request.header("api-key", key);
+            request = request.header("api-key", key.expose_secret());
         }
 
         let response = request.json(&json!({
@@ -249,7 +290,7 @@ impl ContextStore for QdrantContextStore {
         let delete_url = format!("{}/collections/{}/points/delete", self.url, self.collection);
         let mut request = self.client.post(&delete_url);
         if let Some(key) = &self.api_key {
-            request = request.header("api-key", key);
+            request = request.header("api-key", key.expose_secret());
         }
 
         let response = request.json(&json!({

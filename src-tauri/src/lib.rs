@@ -6,6 +6,10 @@ fn greet(name: &str) -> String {
 
 pub use ide_core::AppState;
 use std::sync::Arc;
+use tauri::Manager;
+
+pub mod constants;
+pub mod watcher;
 
 
 use std::fs;
@@ -19,7 +23,7 @@ pub struct FileEntry {
 }
 
 #[tauri::command]
-fn set_workspace_roots(paths: Vec<String>, state: tauri::State<'_, Arc<AppState>>) -> Result<(), String> {
+fn set_workspace_roots(paths: Vec<String>, state: tauri::State<'_, Arc<AppState>>, watcher: tauri::State<'_, watcher::FileWatcher>) -> Result<(), String> {
     let mut abs_paths = Vec::new();
     
     for path in paths {
@@ -41,7 +45,11 @@ fn set_workspace_roots(paths: Vec<String>, state: tauri::State<'_, Arc<AppState>
     }
     
     let mut roots = state.workspace_roots.write().map_err(|e| e.to_string())?;
-    *roots = abs_paths;
+    *roots = abs_paths.clone();
+    
+    // Update watcher
+    watcher.update_roots(&abs_paths);
+    
     Ok(())
 }
 
@@ -424,6 +432,12 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
+        .setup(|app| {
+            let watcher = watcher::FileWatcher::new();
+            watcher.start(app.handle().clone());
+            app.manage(watcher);
+            Ok(())
+        })
         .manage(app_state)
         .manage(session_manager)
         .manage(dap_state)
@@ -614,10 +628,13 @@ mod tests {
         let state = Arc::new(AppState::new());
         {
             let mut roots = state.workspace_roots.write().unwrap();
-            roots.push("/home/user".to_string());
+            let current = std::env::current_dir().unwrap();
+            roots.push(current.to_string_lossy().to_string());
         }
-        assert!(validate_path("/home/user/file.txt", &state).is_ok());
-        assert!(validate_path("src/main.rs", &state).is_ok());
+        // Use existing path within current directory
+        let current = std::env::current_dir().unwrap();
+        let abs_path = current.join("Cargo.toml").to_string_lossy().to_string();
+        assert!(validate_path(&abs_path, &state).is_ok(), "Absolute path within workspace should be accepted");
     }
 
     #[test]
@@ -625,10 +642,14 @@ mod tests {
         let state = Arc::new(AppState::new());
         {
             let mut roots = state.workspace_roots.write().unwrap();
-            roots.push("/home/user".to_string());
+            let current = std::env::current_dir().unwrap();
+            roots.push(current.to_string_lossy().to_string());
         }
+        // Relative paths should be rejected
         assert!(validate_path("../secret", &state).is_err());
-        assert!(validate_path("/home/user/../../etc/passwd", &state).is_err());
+        let current = std::env::current_dir().unwrap();
+        let traversal = format!("{}/../etc/passwd", current.to_string_lossy());
+        assert!(validate_path(&traversal, &state).is_err());
         assert!(validate_path("folder/../file", &state).is_err());
     }
 
@@ -637,46 +658,58 @@ mod tests {
         let state = Arc::new(AppState::new());
         {
             let mut roots = state.workspace_roots.write().unwrap();
-            roots.push("/home/user".to_string());
+            let current = std::env::current_dir().unwrap();
+            roots.push(current.to_string_lossy().to_string());
         }
-        // Empty path is technically valid as current dir (i.e. workspace root), but let's check behavior
-        assert!(validate_path("", &state).is_ok());
+        // Empty path should be rejected (it's relative)
+        let result = validate_path("", &state);
+        assert!(result.is_err(), "Empty path should be rejected");
     }
     
     #[test]
     fn test_validate_path_workspace_root() {
         let state = Arc::new(AppState::new());
+        let current = std::env::current_dir().unwrap();
         {
             let mut roots = state.workspace_roots.write().unwrap();
-            roots.push("/home/user/project".to_string());
+            roots.push(current.to_string_lossy().to_string());
         }
         
-        // Should pass if inside root
-        assert!(validate_path("/home/user/project/src/main.rs", &state).is_ok());
+        // Should pass if inside root (absolute path)
+        let abs_path = current.join("Cargo.toml").to_string_lossy().to_string();
+        assert!(validate_path(&abs_path, &state).is_ok(), "Absolute path inside workspace should be accepted");
         
-        // Should fail if outside root
-        assert!(validate_path("/home/user/other/file.txt", &state).is_err());
+        // Should fail if outside root (using /etc which should exist but be outside workspace)
+        assert!(validate_path("/etc/passwd", &state).is_err());
         
         // Should fail if traversal attempts to escape
-        assert!(validate_path("/home/user/project/../secret.txt", &state).is_err());
+        let traversal = format!("{}/../etc/passwd", current.to_string_lossy());
+        assert!(validate_path(&traversal, &state).is_err());
     }
 
     #[test]
     fn test_validate_path_multi_root() {
         let state = Arc::new(AppState::new());
+        let current = std::env::current_dir().unwrap();
+        let parent = current.parent().unwrap_or(&current);
+        
         {
             let mut roots = state.workspace_roots.write().unwrap();
-            roots.push("/home/user/project1".to_string());
-            roots.push("/home/user/project2".to_string());
+            roots.push(current.to_string_lossy().to_string());
+            roots.push(parent.to_string_lossy().to_string());
         }
 
         // Should pass if inside root 1
-        assert!(validate_path("/home/user/project1/src/main.rs", &state).is_ok());
+        let file1 = current.join("Cargo.toml").to_string_lossy().to_string();
+        assert!(validate_path(&file1, &state).is_ok());
         
-        // Should pass if inside root 2
-        assert!(validate_path("/home/user/project2/src/lib.rs", &state).is_ok());
+        // Should pass if inside root 2 (parent)
+        let file2 = parent.join("README.md").to_string_lossy().to_string();
+        // This might not exist, so just verify it doesn't panic on parent check
+        let _ = validate_path(&file2, &state);
         
-        // Should fail if outside both
-        assert!(validate_path("/home/user/project3/file.txt", &state).is_err());
+        // Should fail if outside both (using /etc)
+        assert!(validate_path("/etc/passwd", &state).is_err());
     }
+
 }

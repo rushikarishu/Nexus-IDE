@@ -25,7 +25,7 @@ function getFileIcon(name: string) {
 
 import { PromptDialog, ConfirmDialog } from "./Dialog";
 
-const FileTreeNode = memo(function FileTreeNode({ entry, onFileSelect, level = 0, onRefresh, gitStatus, workspaceRoot }: { entry: FileEntry, onFileSelect?: (path: string) => void, level?: number, onRefresh?: () => void, gitStatus?: GitStatus | null, workspaceRoot: string }) {
+const FileTreeNode = memo(function FileTreeNode({ entry, onFileSelect, level = 0, onRefresh, gitStatus, workspaceRoot, refreshTrigger }: { entry: FileEntry, onFileSelect?: (path: string) => void, level?: number, onRefresh?: () => void, gitStatus?: GitStatus | null, workspaceRoot: string, refreshTrigger?: number }) {
     const [isOpen, setIsOpen] = useState(false);
     const [children, setChildren] = useState<FileEntry[]>([]);
     const [loading, setLoading] = useState(false);
@@ -117,6 +117,13 @@ const FileTreeNode = memo(function FileTreeNode({ entry, onFileSelect, level = 0
         return () => window.removeEventListener("click", handleClick);
     }, []);
 
+    // Refresh children when trigger changes
+    useEffect(() => {
+        if (refreshTrigger && (isOpen || level === 0)) {
+            void fetchChildren();
+        }
+    }, [refreshTrigger, isOpen, level]);
+
     return (
         <div className="relative">
             <PromptDialog
@@ -198,6 +205,7 @@ const FileTreeNode = memo(function FileTreeNode({ entry, onFileSelect, level = 0
                                 onRefresh={() => void fetchChildren()}
                                 gitStatus={gitStatus}
                                 workspaceRoot={workspaceRoot}
+                                refreshTrigger={refreshTrigger}
                             />
                         ))
                     )}
@@ -213,7 +221,7 @@ interface FileTreeProps {
     gitStatus?: GitStatus | null;
 }
 
-export function FileTree({ workspaceRoots, onFileSelect, gitStatus }: FileTreeProps & { refreshTrigger?: number }) {
+export function FileTree({ workspaceRoots, onFileSelect, gitStatus, refreshTrigger }: FileTreeProps & { refreshTrigger?: number }) {
     // We render a root node for each workspace root
     // But wait, FileTreeNode expects an entry.
     // We need to construct "fake" root entries for each workspace root.
@@ -253,6 +261,7 @@ export function FileTree({ workspaceRoots, onFileSelect, gitStatus }: FileTreePr
                             workspaceRoot={rootPath}
                             gitStatus={gitStatus}
                             level={0}
+                            refreshTrigger={refreshTrigger}
                         />
                     </div>
                 );

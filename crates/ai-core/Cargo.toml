@@ -13,3 +13,9 @@ reqwest = { version = "0.11", features = ["json", "stream"] }
 chrono = { version = "0.4", features = ["serde"] }
 log = "0.4"
 thiserror = "1.0"
+bytes = "1.11.0"
+hmac = "0.12.1"
+sha2 = "0.10.9"
+hex = "0.4.3"
+regex = "1.12.2"
+lru = "0.16.2"
