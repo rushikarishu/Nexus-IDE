@@ -4,7 +4,7 @@ fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
-pub use ide_core::AppState;
+pub use ide_core::{AppState, AppError};
 use std::sync::Arc;
 
 
@@ -71,14 +71,14 @@ pub fn validate_path(path: &str, state: &Arc<AppState>) -> Result<std::path::Pat
     Err(format!("Path validation failed: {}", last_error))
 }
 
-pub fn read_dir_impl(path: &str, state: &Arc<AppState>) -> Result<Vec<FileEntry>, String> {
+pub fn read_dir_impl(path: &str, state: &Arc<AppState>) -> Result<Vec<FileEntry>, AppError> {
     tracing::info!(path = path, "Reading directory");
-    let _ = validate_path(path, state)?;
-    let entries = fs::read_dir(path).map_err(|e| e.to_string())?;
+    let _ = validate_path(path, state).map_err(|e| AppError::new("VALIDATION_ERROR", &e))?;
+    let entries = fs::read_dir(path).map_err(AppError::from)?;
     let mut result = Vec::new();
 
     for entry in entries {
-        let entry = entry.map_err(|e| e.to_string())?;
+        let entry = entry.map_err(AppError::from)?;
         let path = entry.path();
         let name = path.file_name().map(|n| n.to_string_lossy().to_string()).unwrap_or_default();
         let is_dir = path.is_dir();
@@ -105,7 +105,7 @@ pub fn read_dir_impl(path: &str, state: &Arc<AppState>) -> Result<Vec<FileEntry>
 }
 
 #[tauri::command]
-fn read_dir(path: &str, state: tauri::State<'_, Arc<AppState>>) -> Result<Vec<FileEntry>, String> {
+fn read_dir(path: &str, state: tauri::State<'_, Arc<AppState>>) -> Result<Vec<FileEntry>, AppError> {
     read_dir_impl(path, &state)
 }
 
@@ -147,50 +147,50 @@ fn is_binary_file(path: &std::path::Path) -> bool {
     false
 }
 
-pub fn read_file_impl(path: &str, state: &Arc<AppState>) -> Result<String, String> {
+pub fn read_file_impl(path: &str, state: &Arc<AppState>) -> Result<String, AppError> {
     tracing::info!(path = path, "Reading file");
-    let validated_path = validate_path(path, state)?;
+    let validated_path = validate_path(path, state).map_err(|e| AppError::new("VALIDATION_ERROR", &e))?;
     
     // Check file size
-    let metadata = fs::metadata(&validated_path).map_err(|e| e.to_string())?;
+    let metadata = fs::metadata(&validated_path).map_err(AppError::from)?;
     if metadata.len() > MAX_FILE_SIZE {
-        return Err(format!(
+        return Err(AppError::new("FILE_TOO_LARGE", &format!(
             "File too large ({} bytes). Maximum size is {} bytes.",
             metadata.len(),
             MAX_FILE_SIZE
-        ));
+        )));
     }
     
     // Check if binary
     if is_binary_file(&validated_path) {
-        return Err(format!(
+        return Err(AppError::new("BINARY_FILE", &format!(
             "Cannot read binary file: {}. Use a hex viewer or download the file.",
             path
-        ));
+        )));
     }
     
     fs::read_to_string(&validated_path).map_err(|e| {
         if e.kind() == std::io::ErrorKind::InvalidData {
-            format!("File appears to contain invalid UTF-8 data. It may be a binary file: {}", path)
+            AppError::new("INVALID_UTF8", &format!("File appears to contain invalid UTF-8 data. It may be a binary file: {}", path))
         } else {
-            e.to_string()
+            AppError::from(e)
         }
     })
 }
 
 #[tauri::command]
-fn read_file(path: &str, state: tauri::State<'_, Arc<AppState>>) -> Result<String, String> {
+fn read_file(path: &str, state: tauri::State<'_, Arc<AppState>>) -> Result<String, AppError> {
     read_file_impl(path, &state)
 }
 
-pub fn save_file_impl(path: &str, content: &str, state: &Arc<AppState>) -> Result<(), String> {
+pub fn save_file_impl(path: &str, content: &str, state: &Arc<AppState>) -> Result<(), AppError> {
     tracing::info!(path = path, size = content.len(), "Saving file");
-    let _ = validate_path(path, state)?;
-    fs::write(path, content).map_err(|e| e.to_string())
+    let _ = validate_path(path, state).map_err(|e| AppError::new("VALIDATION_ERROR", &e))?;
+    fs::write(path, content).map_err(AppError::from)
 }
 
 #[tauri::command]
-fn save_file(path: &str, content: &str, state: tauri::State<'_, Arc<AppState>>) -> Result<(), String> {
+fn save_file(path: &str, content: &str, state: tauri::State<'_, Arc<AppState>>) -> Result<(), AppError> {
     save_file_impl(path, content, &state)
 }
 

@@ -17,7 +17,8 @@ use std::fs;
 ///
 /// # Examples
 /// ```
-/// let validated = validate_path("/workspace", "/workspace/file.txt")?;
+/// use ai_core::utils::validate_path;
+/// let validated = validate_path("/workspace", "/workspace/file.txt");
 /// ```
 pub fn validate_path(workspace_root: &str, path: &str) -> Result<PathBuf, String> {
     let p = Path::new(path);

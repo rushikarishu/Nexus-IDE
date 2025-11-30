@@ -174,6 +174,18 @@ export function useFileSystem(_lspStatus: "stopped" | "running" | "error", setLs
             }
             return content;
         } catch (err) {
+            // Handle structured error if possible
+            if (typeof err === 'object' && err !== null && 'code' in err) {
+                const appErr = err as { code: string; message: string };
+                if (appErr.code === 'BINARY_FILE') {
+                    alert(`Cannot open binary file: ${path}`);
+                    return "";
+                } else if (appErr.code === 'FILE_TOO_LARGE') {
+                    alert(`File too large to open: ${path}`);
+                    return "";
+                }
+            }
+
             console.error(`Failed to load file: ${String(err)}`);
             throw err;
         }
